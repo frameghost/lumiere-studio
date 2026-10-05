@@ -433,7 +433,8 @@
       height: 2px;
       margin: 0;
       border-radius: 2px;
-      background: #FFFFFF;           /* default: white on the dark hero header */
+      background: var(--brass);        /* GOLDEN bars — brand color, visible on light AND dark */
+      box-shadow: 0 0 9px rgba(196, 164, 124, 0.55), 0 1px 3px rgba(0, 0, 0, 0.6); /* glow + ink shadow ring */
       transform-origin: 50% 50%;     /* pivot = exact bar & button center */
       backface-visibility: hidden;
       will-change: transform, opacity;
@@ -443,23 +444,44 @@
         background-color 0.4s ease;
     }
 
+    /* Visible brass chip behind the icon so the button always reads as a
+       control on ANY background (hero photo, light sections, overlays). */
+    .burger::before {
+      content: "";
+      position: absolute;
+      inset: 3px;
+      border-radius: 12px;
+      background: rgba(16, 13, 11, 0.55);   /* ALWAYS a dark chip => gold pops on any bg */
+      border: 1px solid rgba(196, 164, 124, 0.55);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
     /* Closed state: -6px / 0 / +6px from the center line (12px step) */
     .burger span:nth-child(1) { transform: translate(-50%, calc(-50% - 6px)); }
     .burger span:nth-child(2) { transform: translate(-50%, -50%); }
     .burger span:nth-child(3) { transform: translate(-50%, calc(-50% + 6px)); }
 
-    /* --- Automatic color adaptation (clean cascade, no !important) ---
-       1) scrolled header (light alabaster bg)  -> dark ink bars
-       2) menu open (dark fullscreen overlay)    -> white bars again
-          (declared later + higher specificity => wins over .scrolled) */
-    .site-header.scrolled .burger span { background: var(--ink); }
-    /* Highest-priority color rule (single !important): while the dark
-       fullscreen overlay is open the bars MUST be white — this wins over
-       `.site-header.scrolled` regardless of where media-query rules land
-       in the cascade (Safari reads source order differently from Chrome). */
-    body.menu-open .burger span        { background: #FFFFFF !important; }
+    /* --- Automatic color adaptation (clean cascade) ---
+       1) bars are GOLDEN in EVERY state (hero, scrolled light header,
+          opened dark overlay) — they sit on an always-dark brass chip,
+          so they can never blend into a background or disappear;
+       2) menu open (dark fullscreen overlay)  -> same bright golden X. */
+    /* Highest-priority color rules (!important): while the dark overlay is
+       open the bars MUST be golden — wins over `.site-header.scrolled`
+       regardless of where media-query rules land in the cascade (Safari
+       reads source order differently from Chrome). */
+    body.menu-open .burger span {
+      background: var(--brass) !important;
+      box-shadow: 0 0 10px rgba(196, 164, 124, 0.6), 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+    }
+    body.menu-open .burger::before {
+      background: rgba(30, 27, 25, 0.6) !important;
+      border-color: rgba(196, 164, 124, 0.75) !important;
+    }
 
-    /* --- Open state: flawless X, both diagonals cross dead-center --- */
+    /* --- Open state: flawless GOLDEN X, both diagonals cross dead-center --- */
     body.menu-open .burger span:nth-child(1) {
       transform: translate(-50%, -50%) rotate(45deg);
     }
@@ -2374,8 +2396,8 @@
         z-index: 1002;                   /* above .scrolled header & overlay menu */
       }
 
-      /* Requirement #3: perfect X while body.menu-open — re-declared in
-         this breakpoint with equal specificity but later source order,
+      /* Requirement #3: perfect GOLDEN X while body.menu-open — re-declared
+         in this breakpoint with equal specificity but later source order,
          so it wins over `.site-header.scrolled` bar rules even when the
          user opens the menu after scrolling. Center-pivot geometry:
          translate(-50%,-50%) keeps rotation axis exactly on button center. */
@@ -2389,10 +2411,28 @@
       body.menu-open .burger span:nth-child(3) {
         transform: translate(-50%, -50%) rotate(-45deg);
       }
-      /* Requirement #2 (mobile part): white bars over the dark overlay.
-         Re-declared here with !important so it beats any .scrolled rule
+      /* Requirement #2 (mobile part): GOLDEN bars over the dark overlay.
+         Re-declared here with !important so they beat any .scrolled rule
          inside this breakpoint block on every engine. */
-      body.menu-open .burger span { background: #FFFFFF !important; }
+      body.menu-open .burger span {
+        background: var(--brass) !important;
+        box-shadow: 0 0 10px rgba(196, 164, 124, 0.6), 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+      }
+      body.menu-open .burger::before {
+        background: rgba(30, 27, 25, 0.6) !important;
+        border-color: rgba(196, 164, 124, 0.75) !important;
+      }
+      /* Ultimate visibility insurance on mobile: in EVERY state (hero,
+         scrolled, menu open/closing mid-transition) the bars are golden
+         with a glow+shadow ring over an always-dark chip. */
+      .burger span {
+        background: var(--brass) !important;
+        box-shadow: 0 0 9px rgba(196, 164, 124, 0.55), 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+      }
+      .burger::before {
+        background: rgba(16, 13, 11, 0.55) !important;
+        border-color: rgba(196, 164, 124, 0.55) !important;
+      }
 
       /* ---------- Header on mobile (CRITICAL FIX: logo clipping) ----------
          The fixed header is forced to exactly 100% of the viewport width,
@@ -3697,6 +3737,7 @@
     (function initBurger() {
       const burger = document.getElementById('burgerBtn');
       const menu = document.getElementById('mobileMenu');
+      const header = document.getElementById('siteHeader');
       const body = document.body;
 
       const closeMenu = () => {
@@ -3704,6 +3745,8 @@
         burger.setAttribute('aria-expanded', 'false');
         menu.setAttribute('aria-hidden', 'true');
         body.classList.remove('no-scroll');
+        // Restore the correct header theme immediately after closing
+        header.classList.toggle('scrolled', window.scrollY > 40);
       };
 
       burger.addEventListener('click', () => {
@@ -3713,6 +3756,10 @@
         } else {
           body.classList.add('menu-open');
           body.classList.add('no-scroll');
+          // The fullscreen overlay is DARK — a light "scrolled" header would
+          // render its ink-colored logo invisibly. Force transparent header
+          // (white logo + gold burger) for the whole duration of the menu.
+          header.classList.remove('scrolled');
           burger.setAttribute('aria-expanded', 'true');
           menu.setAttribute('aria-hidden', 'false');
         }
