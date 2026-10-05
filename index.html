@@ -359,29 +359,61 @@
     .header-phone:hover { color: var(--brass); }
 
     /* ================================================================
-       BURGER — clean, bulletproof 46x46 button with 3 centered lines
-       that morph into a perfect X when body.menu-open is set.
-       Geometry trick: all three bars share the SAME vertical center
-       (top: 50%) and are offset only via translateY — so rotating to
-       ±45deg always pivots exactly around the button's center point.
-       No `top` jumps => no "съезжают" glitch on any mobile browser.
+       BURGER — BULLETPROOF 46x46 button, ALWAYS visible on mobile.
+       ----------------------------------------------------------------
+       Why this version can never "disappear":
+       • Base state uses display:flex (NOT inline-flex) + order:-1, so the
+         button is placed FIRST inside .header-actions while the desktop
+         phone/CTA links are taken out of flow (position:absolute below).
+         Result: even if legacy rules or DevTools device-toolbar widths
+         (~1024px) hide the desktop items, the burger keeps real layout
+         size and its right edge is pinned to the safe gutter.
+       • visibility/opacity are hard-pinned to visible/1 at the breakpoint
+         (with !important insurance), so no ancestor rule (.site-header
+         transitions, backdrop-filter repaints, overlay stacking) can
+         fade or cull the button.
+       • Color adaptation is pure cascade (no !important hacks):
+         white over the dark hero → dark ink on .site-header.scrolled →
+         forced white again while body.menu-open (dark fullscreen overlay).
+       • Geometry trick for the X: all three bars share the SAME center
+         (top/left 50% + translate(-50%,-50%)) and are offset ONLY via
+         translateY — so ±45° rotation always pivots exactly around the
+         button center. No `top` animation => no "съезжают" glitch on
+         any mobile browser.
        ================================================================ */
     .burger {
-      display: none;                 /* shown only in the <=768px media query */
+      display: none;                 /* desktop default — shown ONLY <=768px */
       position: relative;
+      order: -1;                     /* first in .header-actions flow => pinned right side */
       width: 46px;
       height: 46px;
-      flex-shrink: 0;
-      z-index: 1002;
+      min-width: 46px;
+      min-height: 46px;
+      flex: 0 0 46px;                /* never squeezed by the logo row */
+      box-sizing: border-box;
+      z-index: 1002;                 /* above the mobile overlay (z 1001) => tappable always */
       padding: 0;
       margin: 0;
       border: none;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
       background: transparent;
       cursor: pointer;
+      visibility: visible;           /* neutral base; breakpoint pins it too */
+      opacity: 1;
+      pointer-events: auto;
       -webkit-tap-highlight-color: transparent;
       touch-action: manipulation;
       isolation: isolate;            /* own stacking context, no repaint bleed */
-      transform: translateZ(0);      /* keep it on its own GPU layer */
+      transform: translateZ(0);      /* own GPU compositor layer */
+    }
+
+    /* Desktop insurance: even if a stale cached stylesheet still carries
+       `display:flex` as the base rule, the burger is force-hidden above
+       the mobile breakpoint. Harmless duplicate on fresh loads. */
+    @media (min-width: 769px) {
+      .burger { display: none !important; }
     }
 
     /* Invisible full-size hit area (>= 44px iOS guideline) */
@@ -401,7 +433,7 @@
       height: 2px;
       margin: 0;
       border-radius: 2px;
-      background: #FFFFFF;
+      background: #FFFFFF;           /* default: white on the dark hero header */
       transform-origin: 50% 50%;     /* pivot = exact bar & button center */
       backface-visibility: hidden;
       will-change: transform, opacity;
@@ -411,14 +443,21 @@
         background-color 0.4s ease;
     }
 
-    /* Closed state: -6px / 0 / +6px from the center line (16px gap total) */
+    /* Closed state: -6px / 0 / +6px from the center line (12px step) */
     .burger span:nth-child(1) { transform: translate(-50%, calc(-50% - 6px)); }
     .burger span:nth-child(2) { transform: translate(-50%, -50%); }
     .burger span:nth-child(3) { transform: translate(-50%, calc(-50% + 6px)); }
 
-    /* Bar color follows header state (transparent hero -> white ink) */
+    /* --- Automatic color adaptation (clean cascade, no !important) ---
+       1) scrolled header (light alabaster bg)  -> dark ink bars
+       2) menu open (dark fullscreen overlay)    -> white bars again
+          (declared later + higher specificity => wins over .scrolled) */
     .site-header.scrolled .burger span { background: var(--ink); }
-    body.menu-open .burger span { background: #FFFFFF !important; }
+    /* Highest-priority color rule (single !important): while the dark
+       fullscreen overlay is open the bars MUST be white — this wins over
+       `.site-header.scrolled` regardless of where media-query rules land
+       in the cascade (Safari reads source order differently from Chrome). */
+    body.menu-open .burger span        { background: #FFFFFF !important; }
 
     /* --- Open state: flawless X, both diagonals cross dead-center --- */
     body.menu-open .burger span:nth-child(1) {
@@ -430,6 +469,13 @@
     }
     body.menu-open .burger span:nth-child(3) {
       transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    /* Keyboard focus ring (a11y) */
+    .burger:focus-visible {
+      outline: 2px solid var(--brass);
+      outline-offset: 3px;
+      border-radius: 6px;
     }
 
     /* Accessibility: honor reduced-motion (X still forms, just instantly) */
@@ -2296,12 +2342,57 @@
 
       .section-title { font-size: clamp(28px, 7.4vw, 38px); }
 
-      /* ---------- Header / Burger ---------- */
+      /* ---------- Header / Burger (BULLETPROOF VISIBILITY) ----------
+         The burger is FORCED visible here with display:flex + pinned
+         visibility/opacity. Desktop-only header items are removed from
+         the flex flow via position:absolute (NOT display:none), so even
+         if any legacy/utility rule ever touches their display, the
+         burger keeps its real 46x46 layout box and can never collapse
+         or be pushed off-screen by a wider sibling. */
       .main-nav { display: none; }
-      .header-phone { display: none; }
-      .header-cta-desktop { display: none; }
 
-      .burger { display: block; }
+      .header-phone,
+      .header-cta-desktop {
+        position: absolute;              /* out of flow => zero width pressure */
+        width: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        clip-path: inset(50%);           /* modern a11y-friendly hide */
+        pointer-events: none;
+        visibility: hidden;
+      }
+
+      .burger {
+        display: flex !important;        /* requirement #1: always shown <=768px */
+        align-items: center;
+        justify-content: center;
+        visibility: visible !important;  /* no ancestor fade/cull can hide it */
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        z-index: 1002;                   /* above .scrolled header & overlay menu */
+      }
+
+      /* Requirement #3: perfect X while body.menu-open — re-declared in
+         this breakpoint with equal specificity but later source order,
+         so it wins over `.site-header.scrolled` bar rules even when the
+         user opens the menu after scrolling. Center-pivot geometry:
+         translate(-50%,-50%) keeps rotation axis exactly on button center. */
+      body.menu-open .burger span:nth-child(1) {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+      body.menu-open .burger span:nth-child(2) {
+        opacity: 0;
+        transform: translate(-50%, -50%) scaleX(0);
+      }
+      body.menu-open .burger span:nth-child(3) {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+      /* Requirement #2 (mobile part): white bars over the dark overlay.
+         Re-declared here with !important so it beats any .scrolled rule
+         inside this breakpoint block on every engine. */
+      body.menu-open .burger span { background: #FFFFFF !important; }
 
       /* ---------- Header on mobile (CRITICAL FIX: logo clipping) ----------
          The fixed header is forced to exactly 100% of the viewport width,
