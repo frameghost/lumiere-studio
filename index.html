@@ -358,37 +358,84 @@
     .site-header.scrolled .header-phone { color: var(--ink); }
     .header-phone:hover { color: var(--brass); }
 
-    /* Burger — hidden on desktop */
+    /* ================================================================
+       BURGER — clean, bulletproof 46x46 button with 3 centered lines
+       that morph into a perfect X when body.menu-open is set.
+       Geometry trick: all three bars share the SAME vertical center
+       (top: 50%) and are offset only via translateY — so rotating to
+       ±45deg always pivots exactly around the button's center point.
+       No `top` jumps => no "съезжают" glitch on any mobile browser.
+       ================================================================ */
     .burger {
-      display: none;
+      display: none;                 /* shown only in the <=768px media query */
+      position: relative;
       width: 46px;
       height: 46px;
-      position: relative;
-      z-index: 1002;
       flex-shrink: 0;
+      z-index: 1002;
+      padding: 0;
+      margin: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      isolation: isolate;            /* own stacking context, no repaint bleed */
+      transform: translateZ(0);      /* keep it on its own GPU layer */
     }
 
+    /* Invisible full-size hit area (>= 44px iOS guideline) */
+    .burger::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    /* --- The three bars: perfectly centered inside the 46x46 box --- */
     .burger span {
       display: block;
       position: absolute;
-      left: 11px;
+      left: 50%;                     /* horizontal centering anchor */
+      top: 50%;                      /* shared vertical center anchor */
       width: 24px;
       height: 2px;
-      background: #FFFFFF;
+      margin: 0;
       border-radius: 2px;
-      transition: transform 0.4s var(--ease-out), opacity 0.25s ease, background-color 0.4s ease;
+      background: #FFFFFF;
+      transform-origin: 50% 50%;     /* pivot = exact bar & button center */
+      backface-visibility: hidden;
+      will-change: transform, opacity;
+      transition:
+        transform 0.4s var(--ease-out, cubic-bezier(0.22, 1, 0.36, 1)),
+        opacity   0.25s ease 0.1s,
+        background-color 0.4s ease;
     }
 
+    /* Closed state: -6px / 0 / +6px from the center line (16px gap total) */
+    .burger span:nth-child(1) { transform: translate(-50%, calc(-50% - 6px)); }
+    .burger span:nth-child(2) { transform: translate(-50%, -50%); }
+    .burger span:nth-child(3) { transform: translate(-50%, calc(-50% + 6px)); }
+
+    /* Bar color follows header state (transparent hero -> white ink) */
     .site-header.scrolled .burger span { background: var(--ink); }
     body.menu-open .burger span { background: #FFFFFF !important; }
 
-    .burger span:nth-child(1) { top: 16px; }
-    .burger span:nth-child(2) { top: 22px; }
-    .burger span:nth-child(3) { top: 28px; }
+    /* --- Open state: flawless X, both diagonals cross dead-center --- */
+    body.menu-open .burger span:nth-child(1) {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+    body.menu-open .burger span:nth-child(2) {
+      opacity: 0;
+      transform: translate(-50%, -50%) scaleX(0);
+    }
+    body.menu-open .burger span:nth-child(3) {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
 
-    body.menu-open .burger span:nth-child(1) { top: 22px; transform: rotate(45deg); }
-    body.menu-open .burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    body.menu-open .burger span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+    /* Accessibility: honor reduced-motion (X still forms, just instantly) */
+    @media (prefers-reduced-motion: reduce) {
+      .burger span { transition-duration: 0.01ms; }
+    }
 
     /* Fullscreen dark overlay menu */
     .mobile-menu {
@@ -412,6 +459,15 @@
       clip-path: circle(150% at calc(100% - 47px) 35px);
       transition: clip-path 0.65s var(--ease-out), opacity 0.4s ease, visibility 0s;
     }
+
+    /* CRITICAL: the overlay is a full-screen fixed layer — it must never
+       swallow taps meant for the burger button (which sits above it via
+       z-index 1002). Without this, on real touch devices the second tap
+       on the X was intercepted by the overlay and the menu could not be
+       closed by tapping the cross itself. */
+    .mobile-menu { pointer-events: none; }
+    body.menu-open .mobile-menu nav,
+    body.menu-open .mobile-menu .mobile-menu-footer { pointer-events: auto; }
 
     .mobile-menu nav { display: flex; flex-direction: column; }
 
