@@ -76,9 +76,11 @@
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
       scroll-padding-top: var(--header-h);
-      /* Hard guarantee against horizontal scroll on mobile browsers:
-         fixed overlays (menu / cookie banner) can never widen the ICB */
+      /* BUG FIX #1 — hard lock against horizontal scroll / white strip:
+         html + body can never exceed the viewport width, whatever any
+         descendant tries to do (fixed overlays, wide tracks, tables). */
       overflow-x: hidden;
+      max-width: 100%;
     }
 
     body {
@@ -93,6 +95,28 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* BUG FIX #1 (cont.) — every root-level block is clamped to the
+       viewport and clips its own overflow, so a single oversized child
+       (marquee track, catalog grid, map, dialog) can never "распирать"
+       the page or paint the white strip on the right side.
+       `overflow-x: clip` has no scroll-context side effects; the
+       `hidden` fallback above covers engines without `clip`. */
+    main, footer, header,
+    .section, .hero, .trust, .cta-band, .marquee-band,
+    .catalog, .masters, .reviews, .location, .site-footer {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
+      overflow-x: clip;
+    }
+
+    .container {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: min(var(--container), 100%);
     }
 
     body.no-scroll { overflow: hidden; }
@@ -770,26 +794,38 @@
       100% { transform: translateY(0);    opacity: 0; }
     }
 
-    /* ---------- 9. Marquee (bulletproof infinite scroll) ----------
-       Robust across iOS Safari / Android Chrome / Samsung Internet:
-       - track is a shrink-to-fit flex row of TWO identical groups;
-       - each group has an EQUAL right padding baked into its own box,
-         so translating the track by exactly -50% loops seamlessly on
-         any device, regardless of how the browser computes max-content;
-       - GPU-composited transform-only keyframes (no left/width tricks),
-         will-change + backface-visibility hints prevent mobile freezes;
-       - hover pause only for devices that truly hover (never touch). */
+    /* ================================================================
+       9. MARQUEE — BUG FIX #2: bulletproof infinite scroll that never
+          freezes on published/mobile builds.
+          Root causes eliminated:
+          a) percentage transforms inside `width:max-content` flex rows
+             are computed inconsistently by some mobile GPUs → replaced
+             with a CSS-variable shift (-1 × --marquee-w) measured in px
+             by JS (with a pure-CSS -50% fallback before measurement);
+          b) `will-change` on the track demotes/pauses the animation on
+             iOS when the band scrolls out of view → moved onto the
+             animated element via keyframe translate3d + GPU hints only;
+          c) stale `animation-play-state:paused` left over from a
+             desktop :hover rule leaking onto hybrid devices → pause is
+             wrapped in (hover:hover) AND re-declared as explicit
+             `running` defaults, plus JS resets play-state on resize;
+          d) `.reveal` opacity transitions on ancestors creating a new
+             stacking context mid-animation → band is isolated and
+             self-contained (overflow:hidden + isolation:isolate).
+       ================================================================ */
     .marquee-band {
       background: var(--ink);
-      /* overflow:hidden clips the moving track; combined with
-         body{overflow-x:hidden} it can never cause page-wide
-         horizontal scrolling on mobile */
+      /* overflow:hidden clips the moving track; combined with the
+         html/body locks (Bug Fix #1) it can NEVER widen the page */
       overflow: hidden;
       padding: 22px 0;
       position: relative;
       z-index: 2;
       width: 100%;
+      max-width: 100%;
       isolation: isolate;
+      contain: paint;             /* band paints in its own box: a frozen
+                                     repaint region can't stall the track */
     }
 
     .marquee-track {
@@ -800,23 +836,26 @@
       min-width: 200%;            /* guarantees >2× viewport even if
                                     max-content misreported on older
                                     mobile engines — no dead space */
+      /* The animation name/duration live on ONE declaration line so no
+         later shorthand can ever reset play-state or iteration-count. */
       animation: marqueeScroll 30s linear infinite;
-      will-change: transform;     /* promote to compositor layer so the
-                                    animation keeps running smoothly
-                                    while the user scrolls */
+      animation-play-state: running;   /* explicit default — nothing can
+                                          leave it stuck on "paused" */
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
-      transform: translateZ(0);   /* force hardware acceleration */
+      transform: translate3d(0, 0, 0); /* GPU compositing from frame 0 */
     }
 
+    /* Pause ONLY on real hover-capable pointer devices; touch devices
+       never receive a sticky paused state (classic "строка замерла"). */
     @media (hover: hover) and (pointer: fine) {
       .marquee-band:hover .marquee-track { animation-play-state: paused; }
+      .marquee-band:not(:hover) .marquee-track { animation-play-state: running; }
     }
 
     .marquee-group {
       flex: 0 0 auto;             /* never stretch/shrink — both halves
-                                    stay pixel-identical => -50% = exact
-                                    one-loop seam */
+                                    stay pixel-identical => exact seam */
       display: flex;
       align-items: center;
       justify-content: space-around;
@@ -840,9 +879,25 @@
       flex-shrink: 0;
     }
 
+    /* Pure-CSS fallback loop (used before/without JS measurement):
+       shifting the duplicated track by exactly -50% = one seamless cycle. */
     @keyframes marqueeScroll {
       from { transform: translate3d(0, 0, 0); }
       to   { transform: translate3d(-50%, 0, 0); }
+    }
+
+    /* JS-measured variant (see initMarquee): shifts by the REAL pixel
+       width of one group → pixel-perfect loop on every engine, immune
+       to inconsistent %-transform math on mobile GPUs. Duration is set
+       proportionally to speed (~70 px/s) so the tempo is identical on
+       all screen sizes. */
+    @keyframes marqueeScrollPx {
+      from { transform: translate3d(0, 0, 0); }
+      to   { transform: translate3d(calc(-1 * var(--marquee-w, 50%)), 0, 0); }
+    }
+
+    .marquee-track.is-measured {
+      animation-name: marqueeScrollPx;
     }
 
     /* ---------- 10. Catalog ---------- */
@@ -2433,6 +2488,25 @@
         background: rgba(16, 13, 11, 0.55) !important;
         border-color: rgba(196, 164, 124, 0.55) !important;
       }
+      /* BUG FIX #3 — final cascade lock: whatever stray rule targets the
+         spans inside this breakpoint (legacy color/transform/display rules,
+         header transitions), while body.menu-open the X geometry and gold
+         color WIN unconditionally. Same values as above, just promoted to
+         !important so no future edit can silently break the cross again. */
+      body.menu-open .burger span:nth-child(1) {
+        transform: translate(-50%, -50%) rotate(45deg) !important;
+      }
+      body.menu-open .burger span:nth-child(2) {
+        opacity: 0 !important;
+        transform: translate(-50%, -50%) scaleX(0) !important;
+      }
+      body.menu-open .burger span:nth-child(3) {
+        transform: translate(-50%, -50%) rotate(-45deg) !important;
+      }
+      body.menu-open .burger span {
+        display: block !important;
+        background: var(--brass) !important;
+      }
 
       /* ---------- Header on mobile (CRITICAL FIX: logo clipping) ----------
          The fixed header is forced to exactly 100% of the viewport width,
@@ -3734,6 +3808,9 @@
     /* ==============================================================
        BURGER MENU — fullscreen dark overlay
        ============================================================== */
+    /* ================================================================
+       BURGER MENU — fullscreen dark overlay + golden X (Bug Fix #3)
+       ============================================================== */
     (function initBurger() {
       const burger = document.getElementById('burgerBtn');
       const menu = document.getElementById('mobileMenu');
@@ -3774,6 +3851,87 @@
 
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+      });
+
+      /* BUG FIX #3 insurance: whenever the viewport crosses the mobile
+         breakpoint, the overlay state is reset so the golden X can never
+         be left half-morphed (bars stuck at ±45°) and the button can
+         never collide with a stale open overlay on desktop widths. */
+      const mqMobile = window.matchMedia('(max-width: 768px)');
+      const resetMenuOnBreakpoint = (mq) => {
+        if (!mq.matches && body.classList.contains('menu-open')) closeMenu();
+      };
+      if (typeof mqMobile.addEventListener === 'function') {
+        mqMobile.addEventListener('change', resetMenuOnBreakpoint);
+      } else if (typeof mqMobile.addListener === 'function') {
+        mqMobile.addListener(resetMenuOnBreakpoint); // legacy Safari
+      }
+    })();
+
+    /* ================================================================
+       MARQUEE — BUG FIX #2 runtime insurance (pairs with the CSS in
+       section 9). Measures the REAL pixel width of one duplicated group
+       and switches the animation to marqueeScrollPx (translate3d by
+       -1 × --marquee-w), which loops pixel-perfectly on every mobile
+       GPU. Also force-resets any stale paused state after rotations /
+       breakpoint changes — the classic cause of "бегущая строка замерла"
+       on published sites. */
+    (function initMarquee() {
+      const band = document.querySelector('.marquee-band');
+      if (!band) return;
+      const track = band.querySelector('.marquee-track');
+      const groups = track ? track.querySelectorAll('.marquee-group') : [];
+      if (!track || groups.length < 2) return;
+
+      const SPEED_PX_PER_SEC = 70; // constant tempo across all screens
+
+      const measure = () => {
+        // Reset transforms/measurement while measuring, so the width is
+        // captured in its neutral state (no %-transform interference).
+        track.classList.remove('is-measured');
+        track.style.setProperty('--marquee-w', '');
+        track.style.animationDuration = '';
+        const w = Math.round(groups[0].getBoundingClientRect().width);
+        if (w > 0) {
+          // Pixel-accurate loop: shift = exactly ONE group width.
+          // Duration scales with width => constant ~70 px/s tempo everywhere.
+          track.style.setProperty('--marquee-w', w + 'px');
+          track.style.animationDuration = (w / SPEED_PX_PER_SEC).toFixed(2) + 's';
+          track.classList.add('is-measured');
+        } else {
+          // Degenerate layout (hidden tab): keep the pure-CSS -50% fallback
+          track.style.animationDuration = '30s';
+        }
+      };
+
+      const ensureRunning = () => {
+        // Nuke any leftover paused play-state (hybrid hover/touch devices).
+        // Only touch inline styles — desktop :hover pause must stay possible.
+        if (track.style.animationPlayState === 'paused') {
+          track.style.animationPlayState = '';
+        }
+      };
+
+      let rafId = 0;
+      const scheduleMeasure = () => {
+        cancelAnimationFrame(rafId);
+        rafId = requestAnimationFrame(() => { measure(); ensureRunning(); });
+      };
+
+      // Measure once fonts are ready (brand text metrics change with webfonts)
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(scheduleMeasure).catch(() => {});
+      }
+      measure();
+
+      window.addEventListener('resize', scheduleMeasure, { passive: true });
+      window.addEventListener('orientationchange', () => {
+        setTimeout(scheduleMeasure, 260); // wait for the OS resize storm to settle
+      }, { passive: true });
+
+      // If the tab was hidden during a layout shift, re-assert motion on return
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) ensureRunning();
       });
     })();
 
