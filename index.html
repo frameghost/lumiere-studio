@@ -1,0 +1,4045 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Lumière Beauty Studio — Красота как искусство высокого порядка | Москва</title>
+  <meta name="description" content="Lumière Beauty Studio — премиальное бьюти-ателье в Москве на Тверской. Парикмахерское искусство, ногтевая эстетика, косметология, перманентный макияж, SPA-ритуалы. Запись онлайн 24/7." />
+  <meta property="og:title" content="Lumière Beauty Studio — Премиальное бьюти-ателье в Москве" />
+  <meta property="og:description" content="Красота как искусство высокого порядка. Kérastase · Luxio · Davines · Comfort Zone · Dyson · Lebel." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231E1B19'/%3E%3Ctext x='16' y='22' font-size='16' font-family='serif' fill='%23C4A47C' text-anchor='middle'%3EL%3C/text%3E%3C/svg%3E" />
+
+  <!-- Google Fonts: Cormorant Garamond (Headings) + Manrope (UI) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ================================================================
+       LUMIÈRE BEAUTY STUDIO — MONOLITHIC PRODUCTION STYLESHEET
+       Design system · Mobile-first · Premium beauty atelier
+       ================================================================ */
+
+    /* ---------- 1. Design Tokens ---------- */
+    :root {
+      --bg-main:     #FAF8F5;   /* Alabaster */
+      --bg-masters:  #F3EFEA;   /* Warm sand — Masters & Reviews */
+      --surface:     #FFFFFF;
+      --ink:         #1E1B19;
+      --brass:       #C4A47C;
+      --brass-dark:  #A9885E;
+
+      --ink-70: rgba(30, 27, 25, 0.70);
+      --ink-60: rgba(30, 27, 25, 0.60);
+      --ink-45: rgba(30, 27, 25, 0.45);
+      --ink-25: rgba(30, 27, 25, 0.22);
+      --ink-12: rgba(30, 27, 25, 0.10);
+      --ink-06: rgba(30, 27, 25, 0.05);
+
+      --brass-22: rgba(196, 164, 124, 0.22);
+      --brass-10: rgba(196, 164, 124, 0.10);
+
+      --dark-bg:   #16120F;
+      --dark-surf: #221D18;
+      --dark-line: rgba(196, 164, 124, 0.22);
+
+      --font-head: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+      --font-ui:   'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+
+      --shadow-card:  0 10px 40px rgba(30, 27, 25, 0.07);
+      --shadow-hover: 0 26px 60px rgba(30, 27, 25, 0.15);
+      --shadow-modal: 0 40px 120px rgba(16, 13, 11, 0.40);
+
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-io:  cubic-bezier(0.65, 0, 0.35, 1);
+
+      --container: 1240px;
+      --gutter: 24px;
+      --header-h: 84px;
+
+      --wa-green: #25D366;
+    }
+
+    /* ---------- 2. Reset & Base ---------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      scroll-padding-top: var(--header-h);
+    }
+
+    body {
+      font-family: var(--font-ui);
+      background-color: var(--bg-main);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body.no-scroll { overflow: hidden; }
+
+    img { max-width: 100%; display: block; }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    ul, ol { list-style: none; }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: 0.01em;
+    }
+
+    ::selection { background: var(--brass); color: #fff; }
+
+    :focus-visible {
+      outline: 2px solid var(--brass-dark);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    input[type="checkbox"] {
+      accent-color: var(--brass-dark);
+      width: 18px;
+      height: 18px;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ---------- 3. Layout Helpers ---------- */
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
+
+    .section { padding: 110px 0; position: relative; }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 36px;
+      margin-bottom: 54px;
+    }
+
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-bottom: 16px;
+    }
+
+    .section-kicker::before {
+      content: "";
+      width: 36px;
+      height: 1px;
+      background: var(--brass);
+    }
+
+    .section-title { font-size: clamp(34px, 4.6vw, 56px); color: var(--ink); }
+
+    .section-sub {
+      max-width: 400px;
+      color: var(--ink-60);
+      font-size: 15px;
+      flex-shrink: 0;
+      padding-bottom: 6px;
+    }
+
+    /* ---------- 4. Reveal on Scroll ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px);
+      transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+      will-change: opacity, transform;
+    }
+
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    .reveal-d5 { transition-delay: 0.40s; }
+    .reveal-d6 { transition-delay: 0.48s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+      .marquee-track, .pre-line-fill, .wa-pulse-ring, .map-pin-dot::after { animation: none !important; }
+    }
+
+    /* ---------- 5. Preloader ---------- */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      background: #FAF8F5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      transition: opacity 0.6s ease;
+    }
+
+    #preloader.fade-out { opacity: 0; pointer-events: none; }
+
+    .pre-logo {
+      font-family: var(--font-head);
+      font-size: clamp(24px, 5vw, 38px);
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding-left: 0.26em;
+      text-align: center;
+    }
+
+    .pre-logo .pre-accent {
+      color: var(--brass-dark);
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0.08em;
+      font-size: 0.5em;
+      padding-left: 0.08em;
+    }
+
+    .pre-line-track {
+      width: min(260px, 62vw);
+      height: 2px;
+      background: var(--ink-12);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .pre-line-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      width: 40%;
+      border-radius: 2px;
+      background: linear-gradient(90deg, transparent, var(--brass) 30%, var(--brass-dark) 70%, transparent);
+      animation: preLineSweep 1.15s var(--ease-io) infinite;
+    }
+
+    @keyframes preLineSweep {
+      0%   { transform: translateX(-110%); }
+      100% { transform: translateX(355%); }
+    }
+
+    /* ---------- 6. Header / Navigation ---------- */
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 900;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease, height 0.4s ease;
+    }
+
+    .site-header.scrolled {
+      background: rgba(250, 248, 245, 0.9);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 var(--ink-12), 0 14px 34px rgba(30, 27, 25, 0.07);
+      height: 70px;
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      width: 100%;
+    }
+
+    .logo {
+      font-family: var(--font-head);
+      font-size: 24px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      white-space: nowrap;
+      transition: color 0.4s ease;
+      z-index: 1002;
+    }
+
+    .logo em { color: var(--brass); font-style: normal; }
+
+    .site-header.scrolled .logo { color: var(--ink); }
+
+    .main-nav { display: flex; align-items: center; gap: 32px; }
+
+    .main-nav a {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.82);
+      position: relative;
+      padding: 6px 0;
+      transition: color 0.4s ease;
+    }
+
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 100%; height: 1px;
+      background: var(--brass);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.4s var(--ease-out);
+    }
+
+    .main-nav a:hover::after { transform: scaleX(1); transform-origin: left; }
+    .main-nav a:hover { color: #FFFFFF; }
+
+    .site-header.scrolled .main-nav a { color: var(--ink-60); }
+    .site-header.scrolled .main-nav a:hover { color: var(--ink); }
+
+    .header-actions { display: flex; align-items: center; gap: 20px; z-index: 1002; }
+
+    .header-phone {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: #FFFFFF;
+      white-space: nowrap;
+      transition: color 0.4s ease;
+    }
+
+    .site-header.scrolled .header-phone { color: var(--ink); }
+    .header-phone:hover { color: var(--brass); }
+
+    /* Burger — hidden on desktop */
+    .burger {
+      display: none;
+      width: 46px;
+      height: 46px;
+      position: relative;
+      z-index: 1002;
+      flex-shrink: 0;
+    }
+
+    .burger span {
+      display: block;
+      position: absolute;
+      left: 11px;
+      width: 24px;
+      height: 2px;
+      background: #FFFFFF;
+      border-radius: 2px;
+      transition: transform 0.4s var(--ease-out), opacity 0.25s ease, background-color 0.4s ease;
+    }
+
+    .site-header.scrolled .burger span { background: var(--ink); }
+    body.menu-open .burger span { background: #FFFFFF !important; }
+
+    .burger span:nth-child(1) { top: 16px; }
+    .burger span:nth-child(2) { top: 22px; }
+    .burger span:nth-child(3) { top: 28px; }
+
+    body.menu-open .burger span:nth-child(1) { top: 22px; transform: rotate(45deg); }
+    body.menu-open .burger span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    body.menu-open .burger span:nth-child(3) { top: 22px; transform: rotate(-45deg); }
+
+    /* Fullscreen dark overlay menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 1001;
+      background: rgba(16, 13, 11, 0.97);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 96px 32px calc(32px + env(safe-area-inset-bottom));
+      opacity: 0;
+      visibility: hidden;
+      clip-path: circle(0% at calc(100% - 47px) 35px);
+      transition: clip-path 0.65s var(--ease-out), opacity 0.4s ease, visibility 0s linear 0.65s;
+    }
+
+    body.menu-open .mobile-menu {
+      opacity: 1;
+      visibility: visible;
+      clip-path: circle(150% at calc(100% - 47px) 35px);
+      transition: clip-path 0.65s var(--ease-out), opacity 0.4s ease, visibility 0s;
+    }
+
+    .mobile-menu nav { display: flex; flex-direction: column; }
+
+    .mobile-menu nav a {
+      font-family: var(--font-head);
+      font-size: 32px;
+      color: #FFFFFF;
+      padding: 13px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out), color 0.3s ease;
+    }
+
+    body.menu-open .mobile-menu nav a { opacity: 1; transform: translateY(0); }
+    body.menu-open .mobile-menu nav a:nth-child(1) { transition-delay: 0.16s; }
+    body.menu-open .mobile-menu nav a:nth-child(2) { transition-delay: 0.22s; }
+    body.menu-open .mobile-menu nav a:nth-child(3) { transition-delay: 0.28s; }
+    body.menu-open .mobile-menu nav a:nth-child(4) { transition-delay: 0.34s; }
+    body.menu-open .mobile-menu nav a:nth-child(5) { transition-delay: 0.40s; }
+
+    .mobile-menu nav a:hover { color: var(--brass); }
+
+    .mobile-menu-footer {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 14px;
+    }
+
+    .mobile-menu-footer .mm-phone {
+      color: var(--brass);
+      font-weight: 700;
+      font-size: 19px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ---------- 7. Buttons ---------- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-ui);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      padding: 17px 36px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      line-height: 1;
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out),
+                  background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--brass) 0%, var(--brass-dark) 100%);
+      color: #FFFFFF;
+      box-shadow: 0 12px 30px rgba(169, 136, 94, 0.35);
+    }
+
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 18px 42px rgba(169, 136, 94, 0.48); }
+    .btn-primary:active { transform: translateY(-1px); }
+
+    .btn-ghost { background: transparent; color: #FFFFFF; border-color: rgba(255, 255, 255, 0.45); }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.12); border-color: #FFFFFF; transform: translateY(-3px); }
+
+    .btn-outline-dark { background: transparent; color: var(--ink); border-color: var(--ink-25); }
+    .btn-outline-dark:hover { border-color: var(--brass-dark); color: var(--brass-dark); transform: translateY(-3px); }
+
+    .btn-sm { padding: 12px 24px; font-size: 11.5px; }
+    .btn-block { width: 100%; }
+
+    .btn[disabled] { opacity: 0.4; pointer-events: none; }
+
+    /* ---------- 8. Hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, rgba(16, 13, 11, 0.92) 0%, rgba(16, 13, 11, 0.65) 45%, rgba(16, 13, 11, 0.1) 100%),
+        url('hero.jpg') center/cover no-repeat;
+      padding: calc(var(--header-h) + 40px) 0 130px;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 18% 42%, transparent 42%, rgba(16, 13, 11, 0.38) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 660px; }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 28px;
+    }
+
+    .hero-kicker::before { content: ""; width: 44px; height: 1px; background: var(--brass); }
+
+    .hero h1 {
+      font-size: clamp(44px, 6.4vw, 80px);
+      color: #FFFFFF;
+      font-weight: 500;
+      line-height: 1.05;
+      margin-bottom: 26px;
+    }
+
+    .hero h1 .accent { font-style: italic; color: var(--brass); }
+
+    .hero-sub {
+      font-size: 17px;
+      color: rgba(255, 255, 255, 0.78);
+      font-weight: 300;
+      line-height: 1.65;
+      max-width: 480px;
+      margin-bottom: 42px;
+    }
+
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex;
+      gap: 52px;
+      margin-top: 64px;
+      padding-top: 34px;
+      border-top: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .hero-stat b {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 42px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1;
+    }
+
+    .hero-stat b i { font-style: normal; color: var(--brass); }
+
+    /* --- Social proof: rating row "4.9 + 5 gold SVG stars" --- */
+    .hero-stat-rating {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .hero-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      transform: translateY(-4px);
+    }
+
+    .hero-stars svg {
+      width: 14px;
+      height: 14px;
+      fill: var(--brass);
+      stroke: none;
+      filter: drop-shadow(0 2px 6px rgba(196, 164, 124, 0.45));
+    }
+
+    .hero-stat span {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 600;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 34px;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 9.5px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .scroll-hint .mouse {
+      width: 24px;
+      height: 38px;
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .scroll-hint .mouse::after {
+      content: "";
+      position: absolute;
+      top: 7px;
+      left: 50%;
+      width: 3px;
+      height: 8px;
+      margin-left: -1.5px;
+      border-radius: 3px;
+      background: var(--brass);
+      animation: mouseWheel 1.8s ease-in-out infinite;
+    }
+
+    @keyframes mouseWheel {
+      0%   { transform: translateY(0);    opacity: 1; }
+      70%  { transform: translateY(12px); opacity: 0; }
+      100% { transform: translateY(0);    opacity: 0; }
+    }
+
+    /* ---------- 9. Marquee ---------- */
+    .marquee-band {
+      background: var(--ink);
+      overflow: hidden;
+      padding: 22px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marqueeScroll 26s linear infinite;
+    }
+
+    .marquee-band:hover .marquee-track { animation-play-state: paused; }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 60px;
+      padding-right: 60px;
+      font-family: var(--font-head);
+      font-size: 21px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      white-space: nowrap;
+    }
+
+    .marquee-item .dot { color: var(--brass); font-size: 15px; }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ---------- 10. Catalog ---------- */
+    .catalog { background: var(--bg-main); }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 46px;
+    }
+
+    .filter-tab {
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: 1px solid var(--ink-25);
+      background: transparent;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--ink-60);
+      transition: all 0.3s var(--ease-out);
+      flex-shrink: 0;
+    }
+
+    .filter-tab:hover { border-color: var(--brass-dark); color: var(--ink); }
+
+    .filter-tab.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #FFFFFF;
+      box-shadow: 0 10px 24px rgba(30, 27, 25, 0.18);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .service-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--ink-06);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+    }
+
+    .service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+    .service-card.hidden-card { display: none; }
+
+    .card-media { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+
+    .card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out);
+    }
+
+    .service-card:hover .card-media img { transform: scale(1.06); }
+
+    .card-cat {
+      position: absolute;
+      top: 16px; left: 16px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      background: rgba(250, 248, 245, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .card-time {
+      position: absolute;
+      bottom: 16px; right: 16px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: rgba(22, 18, 15, 0.6);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #FFFFFF;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-time svg { width: 13px; height: 13px; stroke: var(--brass); }
+
+    .card-body {
+      padding: 26px 26px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .card-title { font-size: 26px; font-weight: 600; color: var(--ink); }
+
+    .card-desc { font-size: 14px; color: var(--ink-60); line-height: 1.6; flex: 1; }
+
+    .card-foot {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-top: 8px;
+      padding-top: 20px;
+      border-top: 1px solid var(--ink-06);
+    }
+
+    .card-price {
+      font-family: var(--font-head);
+      font-size: 27px;
+      font-weight: 700;
+      color: var(--brass-dark);
+      white-space: nowrap;
+      line-height: 1.1;
+    }
+
+    .card-price small {
+      font-family: var(--font-ui);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--ink-45);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .card-book { padding: 13px 24px; font-size: 11px; }
+
+    /* ================================================================
+       D. MASTERS SECTION — Warm sand background (CRITICAL FIX)
+       ================================================================ */
+    .masters {
+      background-color: var(--bg-masters);
+    }
+
+    .masters-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+    }
+
+    .master-card {
+      background-color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .master-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+
+    .master-photo { position: relative; aspect-ratio: 3 / 4; overflow: hidden; }
+
+    .master-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.8s var(--ease-out);
+    }
+
+    .master-card:hover .master-photo img { transform: scale(1.05); }
+
+    /* "Опыт X лет" badge — absolute OVER top-left of photo, glass blur */
+    .exp-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: rgba(250, 248, 245, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.6);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+      white-space: nowrap;
+      box-shadow: 0 6px 18px rgba(16, 13, 11, 0.12);
+    }
+
+    .exp-badge b { color: var(--brass-dark); font-weight: 800; }
+
+    .master-info { padding: 24px 24px 26px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+
+    .master-name { font-size: 24px; font-weight: 600; color: var(--ink); }
+
+    .master-role {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+    }
+
+    .master-bio { font-size: 13.5px; color: var(--ink-60); line-height: 1.55; margin-top: 8px; flex: 1; }
+
+    .master-spec {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+
+    .master-spec span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink-60);
+      background: var(--bg-masters);
+      border-radius: 999px;
+      padding: 6px 12px;
+    }
+
+    /* ================================================================
+       E. SERVICE DETAIL MODAL (<dialog>)
+       ================================================================ */
+    dialog {
+      border: none;
+      padding: 0;
+      max-width: none;
+      max-height: none;
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      color: var(--ink);
+      overflow: hidden;
+    }
+
+    dialog::backdrop {
+      background: rgba(16, 13, 11, 0.55);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    dialog[open] {
+      animation: modalFadeIn 0.35s var(--ease-out);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .modal-shell {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 24px;
+    }
+
+    .modal-panel {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 1060px;
+      max-height: min(88vh, 860px);
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      box-shadow: var(--shadow-modal);
+      position: relative;
+      animation: panelRise 0.45s var(--ease-out);
+      scrollbar-width: thin;
+      scrollbar-color: var(--brass-22) transparent;
+    }
+
+    @keyframes panelRise {
+      from { transform: translateY(28px) scale(0.98); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      z-index: 30;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(250, 248, 245, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid var(--ink-12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s var(--ease-out), background-color 0.3s ease;
+      color: var(--ink);
+    }
+
+    .modal-close:hover { transform: rotate(90deg); background: #FFFFFF; }
+
+    .modal-close svg { width: 18px; height: 18px; stroke: currentColor; }
+
+    /* Detail modal — 2 columns */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 46% 54%;
+      min-height: 560px;
+    }
+
+    .detail-media { position: relative; overflow: hidden; }
+
+    .detail-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+    }
+
+    .detail-media .detail-cat {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: rgba(22, 18, 15, 0.62);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .detail-body { padding: 48px 46px 42px; display: flex; flex-direction: column; gap: 22px; }
+
+    .detail-title { font-size: clamp(30px, 3vw, 42px); font-weight: 600; line-height: 1.08; }
+
+    .detail-meta {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-60);
+    }
+
+    .detail-meta span { display: inline-flex; align-items: center; gap: 8px; }
+
+    .detail-meta svg { width: 16px; height: 16px; stroke: var(--brass-dark); }
+
+    .detail-desc { font-size: 15px; color: var(--ink-60); line-height: 1.7; }
+
+    .detail-block h4 {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-bottom: 14px;
+    }
+
+    .protocol-list li {
+      position: relative;
+      padding: 0 0 0 30px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      color: var(--ink-70);
+      line-height: 1.5;
+    }
+
+    .protocol-list li::before {
+      content: "";
+      position: absolute;
+      left: 6px;
+      top: 8px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 2px solid var(--brass);
+      background: transparent;
+    }
+
+    .price-table { border: 1px solid var(--ink-12); border-radius: var(--radius-md); overflow: hidden; }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--ink-06);
+    }
+
+    .price-row:last-child { border-bottom: none; }
+
+    .price-row:nth-child(even) { background: var(--bg-main); }
+
+    .price-row b {
+      font-family: var(--font-head);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--brass-dark);
+      white-space: nowrap;
+    }
+
+    .detail-cta { margin-top: auto; padding-top: 8px; }
+
+    /* ================================================================
+       F. BOOKING WIZARD — YCLIENTS-STYLE, GLASSMORPHISM
+       ================================================================ */
+    #bookingModal .modal-panel {
+      max-width: 660px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.97) 0%, rgba(243, 239, 234, 0.97) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      max-height: min(92vh, 780px);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wiz-header {
+      padding: 34px 40px 0;
+      flex-shrink: 0;
+    }
+
+    .wiz-brand {
+      font-family: var(--font-head);
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-bottom: 4px;
+    }
+
+    .wiz-heading { font-size: 30px; font-weight: 600; margin-bottom: 22px; }
+
+    /* Progress steps */
+    .wiz-progress {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 8px;
+    }
+
+    .wiz-step-dot {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1.5px solid var(--ink-25);
+      color: var(--ink-45);
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+      transition: all 0.4s var(--ease-out);
+      position: relative;
+      z-index: 1;
+    }
+
+    .wiz-step-dot.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: #FFFFFF;
+      box-shadow: 0 6px 16px rgba(30, 27, 25, 0.25);
+    }
+
+    .wiz-step-dot.done {
+      background: var(--brass);
+      border-color: var(--brass);
+      color: #FFFFFF;
+    }
+
+    .wiz-step-dot.done svg { width: 15px; height: 15px; stroke: #fff; }
+
+    .wiz-step-line {
+      height: 2px;
+      flex: 1;
+      background: var(--ink-12);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wiz-step-line::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--brass);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s var(--ease-out);
+    }
+
+    .wiz-step-line.filled::after { transform: scaleX(1); }
+
+    .wiz-step-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--ink-06);
+    }
+
+    .wiz-step-labels span {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-45);
+      width: 34px;
+      text-align: center;
+      transition: color 0.3s ease;
+    }
+
+    .wiz-step-labels span.active { color: var(--ink); }
+
+    /* Sliding track */
+    .wiz-viewport { flex: 1; min-height: 0; overflow: hidden; position: relative; }
+
+    .wiz-track {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      transition: transform 0.55s var(--ease-io);
+      will-change: transform;
+    }
+
+    .wiz-pane {
+      flex: 0 0 100%;
+      width: 100%;
+      padding: 26px 40px 30px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
+      height: 100%;
+      min-height: 0;
+      scrollbar-width: thin;
+      scrollbar-color: var(--brass-22) transparent;
+    }
+
+    .wiz-pane::-webkit-scrollbar { width: 5px; }
+    .wiz-pane::-webkit-scrollbar-thumb { background: var(--brass-22); border-radius: 5px; }
+
+    .wiz-pane-title {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--brass-dark);
+      margin-bottom: 16px;
+    }
+
+    /* Category chips in wizard */
+    .wiz-cats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .wiz-cat {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--ink-25);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--ink-60);
+      background: rgba(255, 255, 255, 0.7);
+      transition: all 0.25s var(--ease-out);
+      flex-shrink: 0;
+    }
+
+    .wiz-cat.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+    /* Selectable option rows (services, masters) */
+    .opt-list { display: flex; flex-direction: column; gap: 10px; }
+
+    .opt-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--ink-12);
+      background: rgba(255, 255, 255, 0.75);
+      cursor: pointer;
+      text-align: left;
+      width: 100%;
+      transition: border-color 0.25s ease, background-color 0.25s ease, transform 0.25s var(--ease-out), box-shadow 0.25s ease;
+    }
+
+    .opt-item:hover { border-color: var(--brass); transform: translateX(3px); }
+
+    .opt-item.selected {
+      border-color: var(--brass-dark);
+      background: #FFFFFF;
+      box-shadow: 0 10px 26px rgba(169, 136, 94, 0.16);
+    }
+
+    .opt-item.hidden-opt { display: none; }
+
+    .opt-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1.5px solid var(--ink-25);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+      background: transparent;
+    }
+
+    .opt-item.selected .opt-check { background: var(--brass-dark); border-color: var(--brass-dark); }
+
+    .opt-check svg { width: 11px; height: 11px; stroke: #fff; opacity: 0; transition: opacity 0.2s ease; }
+    .opt-item.selected .opt-check svg { opacity: 1; }
+
+    .opt-main { flex: 1; min-width: 0; }
+
+    .opt-name { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+
+    .opt-sub { font-size: 12.5px; color: var(--ink-45); margin-top: 2px; }
+
+    .opt-price {
+      font-family: var(--font-head);
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--brass-dark);
+      white-space: nowrap;
+    }
+
+    .opt-photo {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid var(--brass-22);
+    }
+
+    .opt-item.selected .opt-photo { border-color: var(--brass-dark); }
+
+    .opt-photo-any {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, var(--brass) 0%, var(--brass-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 800;
+      font-family: var(--font-head);
+    }
+
+    /* Dates — horizontal scroll */
+    .dates-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 2px 14px;
+      margin-bottom: 10px;
+      scrollbar-width: none;
+    }
+
+    .dates-scroll::-webkit-scrollbar { display: none; }
+
+    .date-chip {
+      flex: 0 0 auto;
+      min-width: 76px;
+      padding: 14px 10px;
+      border-radius: var(--radius-md);
+      border: 1.5px solid var(--ink-12);
+      background: rgba(255, 255, 255, 0.75);
+      text-align: center;
+      transition: all 0.25s var(--ease-out);
+    }
+
+    .date-chip .d-week {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-45);
+      margin-bottom: 4px;
+    }
+
+    .date-chip .d-day {
+      display: block;
+      font-family: var(--font-head);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1;
+    }
+
+    .date-chip .d-month { display: block; font-size: 10.5px; color: var(--ink-45); margin-top: 4px; font-weight: 600; }
+
+    .date-chip:hover { border-color: var(--brass); }
+
+    .date-chip.selected {
+      background: var(--ink);
+      border-color: var(--ink);
+      box-shadow: 0 12px 26px rgba(30, 27, 25, 0.25);
+    }
+
+    .date-chip.selected .d-week,
+    .date-chip.selected .d-month { color: var(--brass); }
+    .date-chip.selected .d-day { color: #FFFFFF; }
+
+    /* Time slots */
+    .times-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+      gap: 10px;
+    }
+
+    .time-slot {
+      padding: 14px 8px;
+      border-radius: 14px;
+      border: 1.5px solid var(--ink-12);
+      background: rgba(255, 255, 255, 0.75);
+      font-size: 14.5px;
+      font-weight: 700;
+      color: var(--ink);
+      transition: all 0.25s var(--ease-out);
+    }
+
+    .time-slot:hover { border-color: var(--brass); transform: translateY(-2px); }
+
+    .time-slot.selected {
+      background: linear-gradient(135deg, var(--brass) 0%, var(--brass-dark) 100%);
+      border-color: transparent;
+      color: #FFFFFF;
+      box-shadow: 0 12px 26px rgba(169, 136, 94, 0.35);
+    }
+
+    /* Summary strip inside step 4 */
+    .wiz-summary {
+      background: var(--ink);
+      color: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 18px 22px;
+      margin-bottom: 22px;
+      font-size: 13.5px;
+      line-height: 1.7;
+    }
+
+    .wiz-summary b { color: var(--brass); font-weight: 700; }
+
+    /* Form fields */
+    .field { margin-bottom: 18px; }
+
+    .field label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-45);
+      margin-bottom: 8px;
+    }
+
+    .field input[type="text"],
+    .field input[type="tel"] {
+      width: 100%;
+      padding: 15px 18px;
+      border-radius: 14px;
+      border: 1.5px solid var(--ink-12);
+      background: #FFFFFF;
+      font-family: var(--font-ui);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: var(--brass-dark);
+      box-shadow: 0 0 0 4px var(--brass-10);
+    }
+
+    .field input.invalid { border-color: #C0392B; }
+
+    .field-error {
+      display: none;
+      font-size: 12px;
+      color: #C0392B;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .field.show-error .field-error { display: block; }
+
+    .consent-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 12.5px;
+      color: var(--ink-60);
+      line-height: 1.5;
+      cursor: pointer;
+      margin: 4px 0 2px;
+    }
+
+    .consent-row a { text-decoration: underline; color: var(--brass-dark); font-weight: 600; }
+    .consent-row a:hover { color: var(--ink); }
+
+    .consent-row.show-error input { outline: 2px solid #C0392B; outline-offset: 2px; }
+
+    /* Wizard footer nav */
+    .wiz-footer {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 40px calc(22px + env(safe-area-inset-bottom));
+      border-top: 1px solid var(--ink-06);
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .wiz-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-45);
+      padding: 12px 8px;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+
+    .wiz-back:hover { color: var(--ink); }
+    .wiz-back svg { width: 16px; height: 16px; stroke: currentColor; }
+    .wiz-back.invisible { opacity: 0; pointer-events: none; }
+
+    /* Success state */
+    .wiz-success {
+      position: absolute;
+      inset: 0;
+      background: var(--surface);
+      z-index: 20;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px;
+      gap: 18px;
+    }
+
+    .wiz-success.visible { display: flex; animation: modalFadeIn 0.4s var(--ease-out); }
+
+    .success-ring {
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brass) 0%, var(--brass-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 18px 44px rgba(169, 136, 94, 0.4);
+      animation: successPop 0.5s var(--ease-out);
+    }
+
+    @keyframes successPop {
+      0%   { transform: scale(0.4); opacity: 0; }
+      70%  { transform: scale(1.08); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .success-ring svg { width: 40px; height: 40px; stroke: #fff; stroke-width: 2.5; }
+
+    .wiz-success h3 { font-size: 34px; font-weight: 600; }
+    .wiz-success p { color: var(--ink-60); font-size: 15px; max-width: 380px; line-height: 1.6; }
+    .wiz-success .succ-detail { font-weight: 700; color: var(--ink); }
+
+    /* ================================================================
+       G1. TRUST / ADVANTAGES STRIP
+       ================================================================ */
+    .trust { background: var(--bg-main); padding: 96px 0; }
+
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 26px;
+    }
+
+    .trust-item {
+      background: var(--surface);
+      border: 1px solid var(--ink-06);
+      border-radius: var(--radius-md);
+      padding: 30px 28px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+
+    .trust-item:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+    .trust-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--brass-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .trust-icon svg { width: 24px; height: 24px; stroke: var(--brass-dark); stroke-width: 1.7; fill: none; }
+
+    .trust-item h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+    .trust-item p { font-size: 13.5px; color: var(--ink-60); line-height: 1.6; }
+
+    /* ================================================================
+       G2. REVIEWS — warm sand background
+       ================================================================ */
+    .reviews {
+      background-color: var(--bg-masters);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+    }
+
+    .review-card {
+      background-color: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 34px 30px 28px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+
+    .review-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hover); }
+
+    .review-quote-mark {
+      font-family: var(--font-head);
+      font-size: 84px;
+      line-height: 0.6;
+      color: var(--brass-22);
+      height: 34px;
+    }
+
+    .review-stars { display: flex; gap: 3px; }
+
+    .review-stars svg { width: 15px; height: 15px; fill: var(--brass); stroke: none; }
+
+    .review-text { font-size: 14.5px; color: var(--ink-70); line-height: 1.7; flex: 1; }
+
+    .review-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding-top: 18px;
+      border-top: 1px solid var(--ink-06);
+    }
+
+    .review-author b { display: block; font-size: 14.5px; font-weight: 700; }
+
+    .review-author span { display: block; font-size: 12px; color: var(--ink-45); margin-top: 2px; }
+
+    .src-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .src-badge.yandex { background: #FCECE9; color: #D8221E; border: 1px solid rgba(216, 34, 30, 0.15); }
+    .src-badge.twogis { background: #E7F0FA; color: #1368CC; border: 1px solid rgba(19, 104, 204, 0.18); }
+
+    /* Colored source dot: Yandex = red, 2GIS = blue */
+    .src-badge .badge-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .src-badge.yandex .badge-dot { background: #D8221E; box-shadow: 0 0 0 3px rgba(216, 34, 30, 0.14); }
+    .src-badge.twogis .badge-dot { background: #1368CC; box-shadow: 0 0 0 3px rgba(19, 104, 204, 0.14); }
+
+    .src-badge .badge-glyph {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 900;
+      color: #fff;
+    }
+
+    .yandex .badge-glyph { background: #D8221E; }
+    .twogis .badge-glyph { background: #00A650; }
+
+    /* ================================================================
+       G3. LOCATION + CSS MAP
+       ================================================================ */
+    .location { background: var(--bg-main); }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 400px 1fr;
+      gap: 30px;
+      align-items: stretch;
+    }
+
+    .loc-info {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      border: 1px solid var(--ink-06);
+    }
+
+    .loc-row { display: flex; gap: 16px; align-items: flex-start; }
+
+    .loc-ico {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: var(--brass-10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .loc-ico svg { width: 20px; height: 20px; stroke: var(--brass-dark); stroke-width: 1.8; fill: none; }
+
+    .loc-row h4 {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-45);
+      margin-bottom: 5px;
+    }
+
+    .loc-row p { font-size: 15px; font-weight: 600; color: var(--ink); line-height: 1.5; }
+
+    .loc-row p small { display: block; font-size: 12.5px; color: var(--ink-45); font-weight: 500; margin-top: 3px; }
+
+    /* Outline button used as <a> (route link to Yandex Maps) */
+    .btn-outline {
+      background: transparent;
+      color: var(--brass-dark);
+      border-color: rgba(169, 136, 94, 0.45);
+      box-shadow: none;
+    }
+
+    .btn-outline:hover {
+      transform: translateY(-3px);
+      background: var(--brass-10);
+      border-color: var(--brass-dark);
+      color: var(--brass-dark);
+      box-shadow: 0 12px 26px rgba(169, 136, 94, 0.18);
+    }
+
+    .btn-outline:active { transform: translateY(-1px); }
+
+    .btn-outline svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 1.8; fill: none; flex-shrink: 0; }
+
+    a.btn { text-decoration: none; }
+
+    /* Custom CSS map */
+    .css-map {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 460px;
+      background:
+        linear-gradient(rgba(243, 239, 234, 0.9), rgba(243, 239, 234, 0.9)),
+        repeating-linear-gradient(0deg, transparent 0 68px, rgba(196, 164, 124, 0.16) 68px 70px),
+        repeating-linear-gradient(90deg, transparent 0 68px, rgba(196, 164, 124, 0.16) 68px 70px),
+        #EDE6DC;
+      box-shadow: var(--shadow-card);
+      border: 1px solid var(--ink-06);
+    }
+
+    /* stylised roads */
+    .map-road {
+      position: absolute;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 1px rgba(30, 27, 25, 0.06);
+    }
+
+    .road-v { top: 0; bottom: 0; width: 26px; }
+    .road-h { left: 0; right: 0; height: 20px; }
+
+    .road-main { background: #FBF3E4; box-shadow: 0 0 0 1px rgba(169, 136, 94, 0.3); }
+
+    .map-park {
+      position: absolute;
+      background: rgba(154, 178, 143, 0.35);
+      border-radius: 22px;
+      border: 1px solid rgba(122, 148, 110, 0.3);
+    }
+
+    .map-water {
+      position: absolute;
+      background: rgba(158, 190, 205, 0.45);
+      border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+    }
+
+    .map-label {
+      position: absolute;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-45);
+      white-space: nowrap;
+    }
+
+    .map-block {
+      position: absolute;
+      background: rgba(30, 27, 25, 0.05);
+      border-radius: 6px;
+    }
+
+    /* Pulsing pin */
+    .map-pin {
+      position: absolute;
+      left: 50%;
+      top: 44%;
+      transform: translate(-50%, -100%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .map-pin-dot {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brass) 0%, var(--brass-dark) 100%);
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 8px 20px rgba(169, 136, 94, 0.5);
+      position: relative;
+    }
+
+    .map-pin-dot::after {
+      content: "";
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 2px solid var(--brass);
+      animation: pinPulse 2s var(--ease-out) infinite;
+    }
+
+    @keyframes pinPulse {
+      0%   { transform: scale(0.5); opacity: 0.9; }
+      100% { transform: scale(1.9); opacity: 0; }
+    }
+
+    .map-pin-tip {
+      width: 0;
+      height: 0;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 10px solid var(--brass-dark);
+      margin-top: -3px;
+    }
+
+    .map-pin-label {
+      margin-top: 12px;
+      background: var(--ink);
+      color: #FFFFFF;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 8px 16px;
+      border-radius: 999px;
+      white-space: nowrap;
+      box-shadow: 0 10px 24px rgba(30, 27, 25, 0.3);
+    }
+
+    .map-pin-label b { color: var(--brass); }
+
+    /* ================================================================
+       G4. CTA BAND
+       ================================================================ */
+    .cta-band {
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(196, 164, 124, 0.25) 0%, transparent 55%),
+        var(--dark-bg);
+      padding: 90px 0;
+      text-align: center;
+    }
+
+    .cta-band h2 {
+      color: #FFFFFF;
+      font-size: clamp(32px, 4.4vw, 54px);
+      margin-bottom: 18px;
+    }
+
+    .cta-band h2 em { color: var(--brass); font-style: italic; }
+
+    .cta-band p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 16px;
+      max-width: 520px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+    }
+
+    /* ================================================================
+       G5. FOOTER — Dark theme
+       ================================================================ */
+    .site-footer {
+      background: var(--dark-bg);
+      color: rgba(255, 255, 255, 0.72);
+      padding: 80px 0 0;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+      gap: 44px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid var(--dark-line);
+    }
+
+    .footer-logo {
+      font-family: var(--font-head);
+      font-size: 26px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      margin-bottom: 18px;
+    }
+
+    .footer-logo em { color: var(--brass); font-style: normal; }
+
+    .footer-about { font-size: 14px; line-height: 1.7; color: rgba(255, 255, 255, 0.55); max-width: 320px; }
+
+    .footer-col h4 {
+      font-family: var(--font-ui);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--brass);
+      margin-bottom: 22px;
+    }
+
+    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+
+    .footer-col a, .footer-col li {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.62);
+      transition: color 0.25s ease;
+    }
+
+    .footer-col a:hover { color: var(--brass); }
+
+    .footer-socials { display: flex; gap: 12px; margin-top: 22px; }
+
+    .footer-socials a {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--dark-line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: rgba(255, 255, 255, 0.7);
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .footer-socials a:hover { background: var(--brass); border-color: var(--brass); color: var(--dark-bg); transform: translateY(-3px); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 26px 0 30px;
+      font-size: 12.5px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .footer-legal { display: flex; gap: 24px; flex-wrap: wrap; }
+
+    .footer-legal a { color: rgba(255, 255, 255, 0.5); text-decoration: underline; text-underline-offset: 3px; }
+    .footer-legal a:hover { color: var(--brass); }
+
+    /* ================================================================
+       G6. FLOATING WHATSAPP BUTTON
+       ================================================================ */
+    .wa-float {
+      position: fixed;
+      right: 26px;
+      bottom: 26px;
+      z-index: 950;
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: var(--wa-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 14px 34px rgba(37, 211, 102, 0.45);
+      transition: transform 0.3s var(--ease-out), box-shadow 0.3s var(--ease-out);
+    }
+
+    .wa-float:hover { transform: scale(1.08) translateY(-3px); box-shadow: 0 20px 44px rgba(37, 211, 102, 0.55); }
+
+    .wa-float svg { width: 32px; height: 32px; fill: #FFFFFF; }
+
+    .wa-pulse-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--wa-green);
+      z-index: -1;
+      animation: waPulse 2.2s var(--ease-out) infinite;
+    }
+
+    @keyframes waPulse {
+      0%   { transform: scale(1);   opacity: 0.5; }
+      100% { transform: scale(1.8); opacity: 0; }
+    }
+
+    .wa-tooltip {
+      position: absolute;
+      right: calc(100% + 14px);
+      top: 50%;
+      transform: translateY(-50%) translateX(8px);
+      background: var(--ink);
+      color: #fff;
+      font-size: 12.5px;
+      font-weight: 600;
+      padding: 9px 16px;
+      border-radius: 10px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
+    }
+
+    .wa-tooltip::after {
+      content: "";
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-left-color: var(--ink);
+    }
+
+    .wa-float:hover .wa-tooltip { opacity: 1; transform: translateY(-50%) translateX(0); }
+
+    /* ================================================================
+       G7. COOKIE BANNER
+       ================================================================ */
+    #cookieBanner {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 2147483647;
+      background: rgba(22, 18, 15, 0.96);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 20px 0 calc(20px + env(safe-area-inset-bottom));
+      transform: translateY(110%);
+      transition: transform 0.6s var(--ease-out);
+      box-shadow: 0 -20px 60px rgba(16, 13, 11, 0.35);
+    }
+
+    #cookieBanner.visible { transform: translateY(0); }
+
+    .cookie-inner {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      justify-content: space-between;
+    }
+
+    .cookie-text { font-size: 13.5px; line-height: 1.6; max-width: 760px; }
+
+    .cookie-text a { color: var(--brass); text-decoration: underline; text-underline-offset: 3px; font-weight: 600; }
+    .cookie-text a:hover { color: #FFFFFF; }
+
+    .cookie-actions { display: flex; gap: 12px; flex-shrink: 0; align-items: center; }
+
+    .btn-cookie-decline {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+      padding: 12px 18px;
+      transition: color 0.25s ease;
+    }
+
+    .btn-cookie-decline:hover { color: #FFFFFF; }
+
+    .btn-cookie-accept {
+      background: linear-gradient(135deg, var(--brass) 0%, var(--brass-dark) 100%);
+      color: #FFFFFF;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 14px 34px;
+      border-radius: 999px;
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+      box-shadow: 0 10px 26px rgba(169, 136, 94, 0.35);
+    }
+
+    .btn-cookie-accept:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(169, 136, 94, 0.5); }
+
+    /* ================================================================
+       H. RESPONSIVE — TABLET (≤1024px)
+       ================================================================ */
+    @media (max-width: 1024px) {
+      .section { padding: 88px 0; }
+
+      .cards-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; }
+      .masters-grid { grid-template-columns: repeat(2, 1fr); }
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: 1fr; max-width: 640px; margin: 0 auto; }
+
+      .location-grid { grid-template-columns: 1fr; }
+      .css-map { min-height: 380px; }
+
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+
+      .detail-grid { grid-template-columns: 1fr; }
+      .detail-media { min-height: 300px; }
+      .detail-body { padding: 34px 30px 30px; }
+
+      .hero-stats { gap: 34px; }
+    }
+
+    /* ================================================================
+       I. RESPONSIVE — MOBILE CRITICAL FIXES (≤768px)
+       ================================================================ */
+    @media (max-width: 768px) {
+
+      :root { --header-h: 68px; --gutter: 18px; }
+
+      body { font-size: 15px; }
+
+      .section { padding: 64px 0; }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        margin-bottom: 34px;
+      }
+
+      .section-sub { max-width: 100%; padding-bottom: 0; }
+
+      .section-title { font-size: clamp(28px, 7.4vw, 38px); }
+
+      /* ---------- Header / Burger ---------- */
+      .main-nav { display: none; }
+      .header-phone { display: none; }
+      .header-cta-desktop { display: none; }
+
+      .burger { display: block; }
+
+      .logo { font-size: 19px; letter-spacing: 0.14em; }
+
+      /* ---------- HERO ON MOBILE (CRITICAL FIX #2) ----------
+         Centered text, smaller H1, full-width buttons,
+         VERTICAL dark gradient so bg image stays visible
+         while text remains 100% readable. */
+      .hero {
+        background:
+          linear-gradient(180deg, rgba(16, 13, 11, 0.88) 0%, rgba(16, 13, 11, 0.62) 45%, rgba(16, 13, 11, 0.86) 100%),
+          url('hero.jpg') center/cover no-repeat;
+        align-items: flex-end;
+        padding: calc(var(--header-h) + 24px) 0 96px;
+        min-height: 92vh;
+        min-height: 92svh;
+      }
+
+      .hero::after { display: none; }
+
+      .hero-content {
+        max-width: 100%;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .hero-kicker { justify-content: center; margin-bottom: 18px; letter-spacing: 0.24em; }
+      .hero-kicker::before { width: 26px; }
+
+      .hero h1 {
+        font-size: clamp(36px, 10vw, 48px);
+        margin-bottom: 16px;
+      }
+
+      .hero-sub {
+        font-size: 14.5px;
+        max-width: 100%;
+        margin: 0 auto 26px;
+      }
+
+      .hero-btns {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .hero-btns .btn { width: 100%; }
+
+      .hero-stats {
+        gap: 0;
+        justify-content: space-between;
+        margin-top: 34px;
+        padding-top: 22px;
+      }
+
+      .hero-stat b { font-size: 28px; }
+      .hero-stat span { font-size: 9px; letter-spacing: 0.1em; }
+      .hero-stat { flex: 1; text-align: center; }
+
+      /* Rating block: number + stars stay centered as one unit on mobile */
+      .hero-stat-rating { justify-content: center; gap: 8px; }
+      .hero-stars svg { width: 11px; height: 11px; }
+      .hero-stat:nth-child(2) { border-left: 1px solid rgba(255,255,255,0.14); border-right: 1px solid rgba(255,255,255,0.14); }
+
+      .scroll-hint { display: none; }
+
+      /* ---------- Marquee on mobile ---------- */
+      .marquee-band { padding: 15px 0; }
+      .marquee-item { font-size: 15px; gap: 34px; padding-right: 34px; letter-spacing: 0.16em; }
+
+      /* ---------- CATALOG FILTER TABS (CRITICAL FIX #1) ----------
+         Single horizontal scrollable row. NO wrapping. Hidden scrollbar. */
+      .filter-tabs {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 8px;
+        margin: 0 calc(-1 * var(--gutter)) 30px;
+        padding: 2px var(--gutter) 12px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+
+      .filter-tabs::-webkit-scrollbar { display: none; width: 0; height: 0; }
+
+      .filter-tab { padding: 11px 20px; font-size: 12.5px; }
+
+      .cards-grid { grid-template-columns: 1fr; gap: 20px; }
+
+      .card-media { aspect-ratio: 16 / 10; }
+
+      .card-body { padding: 20px 20px 18px; }
+
+      .card-title { font-size: 22px; }
+
+      .card-price { font-size: 23px; }
+
+      /* ---------- MASTERS on mobile ---------- */
+      .masters-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+
+      .master-photo { aspect-ratio: 3 / 4; }
+
+      .master-info { padding: 16px 14px 18px; }
+
+      .master-name { font-size: 17px; }
+
+      .master-role { font-size: 9.5px; letter-spacing: 0.12em; }
+
+      .master-bio { display: none; }
+
+      .master-spec { display: none; }
+
+      .exp-badge { top: 8px; left: 8px; padding: 5px 10px; font-size: 9px; }
+
+      /* ---------- TRUST strip ---------- */
+      .trust { padding: 56px 0; }
+      .trust-grid { grid-template-columns: 1fr; gap: 14px; }
+      .trust-item { padding: 22px 22px; display: grid; grid-template-columns: 52px 1fr; gap: 6px 16px; align-items: start; }
+      .trust-icon { margin-bottom: 0; grid-row: span 2; width: 46px; height: 46px; }
+      .trust-item h3 { font-size: 19px; }
+
+      /* ---------- REVIEWS ---------- */
+      .reviews-grid { grid-template-columns: 1fr; gap: 16px; }
+      .review-card { padding: 26px 22px 22px; }
+
+      /* ---------- LOCATION ---------- */
+      .loc-info { padding: 26px 22px; gap: 20px; }
+      .css-map { min-height: 320px; border-radius: var(--radius-md); }
+      .map-pin-label { font-size: 10px; padding: 6px 12px; }
+
+      /* ---------- CTA band ---------- */
+      .cta-band { padding: 64px 0; }
+      .cta-band .btn { width: 100%; }
+
+      /* ---------- FOOTER ---------- */
+      .site-footer { padding-top: 56px; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 34px; padding-bottom: 40px; }
+
+      .footer-about { max-width: 100%; }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding-bottom: calc(96px + env(safe-area-inset-bottom)); /* clear WA button */
+      }
+
+      .footer-legal { gap: 16px; flex-direction: column; }
+
+      /* ---------- MODALS ON MOBILE (CRITICAL FIX #3) ----------
+         Both <dialog>s = 100vw × 100vh, 0 radius, close top-right */
+      dialog { width: 100vw; height: 100vh; height: 100dvh; }
+
+      .modal-shell { padding: 0; align-items: stretch; justify-content: stretch; }
+
+      .modal-panel {
+        max-width: 100%;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100vh;
+        max-height: 100dvh;
+        border-radius: 0;
+      }
+
+      .modal-close {
+        top: 14px;
+        right: 14px;
+        width: 42px;
+        height: 42px;
+      }
+
+      /* Detail modal mobile */
+      .detail-grid { min-height: 0; }
+
+      .detail-media { min-height: 240px; height: 30vh; }
+
+      .detail-body { padding: 56px 20px calc(28px + env(safe-area-inset-bottom)); gap: 18px; }
+
+      .detail-title { font-size: 28px; }
+
+      .detail-cta .btn { width: 100%; }
+
+      /* Booking wizard mobile */
+      #bookingModal .modal-panel { max-height: 100dvh; }
+
+      .wiz-header { padding: 22px 20px 0; }
+
+      .wiz-heading { font-size: 23px; margin-bottom: 16px; }
+
+      .wiz-step-dot { width: 28px; height: 28px; font-size: 11px; }
+
+      .wiz-step-labels span { font-size: 8.5px; width: 28px; letter-spacing: 0.04em; }
+
+      .wiz-pane { padding: 20px 20px 26px; }
+
+      .wiz-cats {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding-bottom: 6px;
+      }
+
+      .wiz-cats::-webkit-scrollbar { display: none; }
+
+      .opt-item { padding: 12px 14px; gap: 10px; }
+
+      .opt-photo, .opt-photo-any { width: 40px; height: 40px; }
+
+      .opt-name { font-size: 13.5px; }
+
+      .opt-price { font-size: 17px; }
+
+      .date-chip { min-width: 64px; padding: 11px 8px; }
+      .date-chip .d-day { font-size: 20px; }
+
+      .times-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+
+      .time-slot { padding: 12px 6px; font-size: 13.5px; }
+
+      .wiz-footer { padding: 14px 20px calc(18px + env(safe-area-inset-bottom)); }
+
+      .wiz-footer .btn-primary { padding: 15px 26px; font-size: 12px; }
+
+      .wiz-success { padding: 24px; }
+      .wiz-success h3 { font-size: 27px; }
+
+      /* ---------- WHATSAPP BUTTON ON MOBILE (CRITICAL FIX #4) ----------
+         50×50px, tucked clear of footer text & cookie banner */
+      .wa-float {
+        width: 50px;
+        height: 50px;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom));
+        box-shadow: 0 10px 24px rgba(37, 211, 102, 0.45);
+      }
+
+      .wa-float svg { width: 26px; height: 26px; }
+
+      .wa-tooltip { display: none; }
+
+      /* Cookie banner stacks above WA button on mobile */
+      #cookieBanner { padding: 16px 0 calc(16px + env(safe-area-inset-bottom)); }
+
+      .cookie-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .cookie-text { font-size: 12.5px; }
+
+      .cookie-actions { width: 100%; flex-direction: column-reverse; gap: 8px; }
+
+      .btn-cookie-accept { width: 100%; text-align: center; padding: 14px 20px; }
+
+      .btn-cookie-decline { align-self: center; }
+    }
+
+    /* ---------- Very small phones ---------- */
+    @media (max-width: 400px) {
+      .masters-grid { grid-template-columns: 1fr; }
+      .master-bio { display: block; }
+      .master-spec { display: flex; }
+      .hero-stats { flex-wrap: wrap; gap: 18px 0; }
+      .hero-stat { flex: 1 1 40%; }
+      .hero-stat:nth-child(2) { border: none; }
+      .filter-tab { padding: 10px 16px; font-size: 12px; }
+    }
+
+    /* ---------- Landscape phones: keep dialogs scrollable ---------- */
+    @media (max-height: 500px) and (orientation: landscape) {
+      .modal-panel { max-height: 94vh; }
+      .detail-media { height: 200px; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ============================================================
+       A. PRELOADER
+       ============================================================ -->
+  <div id="preloader" aria-hidden="true">
+    <div class="pre-logo">
+      Lumière
+      <span class="pre-accent">Beauty Atelier</span>
+    </div>
+    <div class="pre-line-track"><div class="pre-line-fill"></div></div>
+  </div>
+
+  <!-- ============================================================
+       HEADER
+       ============================================================ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#top" class="logo">Lum<i>î</i>re <em>Beauty</em></a>
+
+      <nav class="main-nav" aria-label="Основная навигация">
+        <a href="#catalog">Услуги</a>
+        <a href="#masters">Мастера</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#location">Как добраться</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="tel:+74951234567" class="header-phone">+7 (495) 123-45-67</a>
+        <button type="button" class="btn btn-primary btn-sm header-cta-desktop" data-open-booking>Записаться</button>
+        <button type="button" class="burger" id="burgerBtn" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Fullscreen dark overlay menu (mobile) -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav aria-label="Мобильная навигация">
+      <a href="#catalog">Услуги</a>
+      <a href="#masters">Мастера</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#location">Как добраться</a>
+      <a href="#" data-open-booking>Онлайн-запись</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <a href="tel:+74951234567" class="mm-phone">+7 (495) 123-45-67</a>
+      <span>Москва, ул. Тверская, 12 · ежедневно 10:00 — 22:00</span>
+    </div>
+  </div>
+
+  <main id="top">
+
+    <!-- ============================================================
+         B. HERO
+         ============================================================ -->
+    <section class="hero" aria-label="Главный экран">
+      <div class="container">
+        <div class="hero-content">
+          <span class="hero-kicker">Премиальное бьюти-ателье · Москва</span>
+          <h1>Красота как <span class="accent">искусство</span> высокого порядка</h1>
+          <p class="hero-sub">Ателье полного цикла на Тверской: волосы, ногти, взгляд, косметология и SPA. Только топ-мастера, только люксовые бренды — Kérastase, Davines, Comfort Zone.</p>
+          <div class="hero-btns">
+            <button type="button" class="btn btn-primary" data-open-booking>Записаться онлайн</button>
+            <a href="#catalog" class="btn btn-ghost">Смотреть услуги</a>
+          </div>
+          <div class="hero-stats">
+            <div class="hero-stat"><b>14<i>+</i></b><span>лет на Тверской</span></div>
+            <div class="hero-stat"><b>38<i>k</i></b><span>довольных клиентов</span></div>
+            <div class="hero-stat">
+              <div class="hero-stat-rating">
+                <b>4.9</b>
+                <span class="hero-stars" aria-label="Пять звёзд из пяти">
+                  <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+                </span>
+              </div>
+              <span>Рейтинг на Яндекс Картах и 2ГИС</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <div class="mouse"></div>
+        <span>Листайте</span>
+      </div>
+    </section>
+
+    <!-- Infinite marquee -->
+    <div class="marquee-band" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-item">
+          <span>Kérastase</span><span class="dot">◆</span>
+          <span>Luxio</span><span class="dot">◆</span>
+          <span>Davines</span><span class="dot">◆</span>
+          <span>Comfort Zone</span><span class="dot">◆</span>
+          <span>Dyson</span><span class="dot">◆</span>
+          <span>Lebel</span><span class="dot">◆</span>
+        </div>
+        <div class="marquee-item">
+          <span>Kérastase</span><span class="dot">◆</span>
+          <span>Luxio</span><span class="dot">◆</span>
+          <span>Davines</span><span class="dot">◆</span>
+          <span>Comfort Zone</span><span class="dot">◆</span>
+          <span>Dyson</span><span class="dot">◆</span>
+          <span>Lebel</span><span class="dot">◆</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================
+         C. CATALOG — TABS + 6 SERVICE CARDS
+         Entire card opens the detail dialog. No "Подробнее" button.
+         ============================================================ -->
+    <section class="section catalog" id="catalog">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Каталог услуг</span>
+            <h2 class="section-title">Искусство в каждой детали</h2>
+          </div>
+          <p class="section-sub">Шесть направлений ателье. Нажмите на карточку, чтобы увидеть протокол сеанса и полный прайс.</p>
+        </div>
+
+        <div class="filter-tabs reveal" role="tablist" aria-label="Фильтр услуг по категориям">
+          <button type="button" class="filter-tab active" role="tab" aria-selected="true" data-filter="all">Все</button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="hair">Волосы</button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="nails">Ногти</button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="lashes">Взгляд</button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="cosmo">Косметология</button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="pmu">Перманент</button>
+          <button type="button" class="filter-tab" role="tab" aria-selected="false" data-filter="spa">SPA</button>
+        </div>
+
+        <div class="cards-grid" id="cardsGrid">
+
+          <!-- Card 1 · hair -->
+          <article class="service-card reveal" data-id="hair" data-cat="hair" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Парикмахерское искусство — открыть детали">
+            <div class="card-media">
+              <img src="service1.jpg" alt="Парикмахерское искусство — укладка Kérastase" loading="lazy" />
+              <span class="card-cat">Волосы</span>
+              <span class="card-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                120 мин
+              </span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Парикмахерское искусство</h3>
+              <p class="card-desc">Авторские стрижки, сложное окрашивание и уход Kérastase / Lebel. Цветокоррекция под тип внешности.</p>
+              <div class="card-foot">
+                <div class="card-price"><small>Стоимость</small>от 4 500 ₽</div>
+                <button type="button" class="btn btn-primary btn-sm card-book" data-direct-book="hair">Записаться</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2 · nails -->
+          <article class="service-card reveal reveal-d1" data-id="nails" data-cat="nails" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Ногтевая эстетика — открыть детали">
+            <div class="card-media">
+              <img src="service2.jpg" alt="Ногтевая эстетика — маникюр и покрытие Luxio" loading="lazy" />
+              <span class="card-cat">Ногти</span>
+              <span class="card-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                90 мин
+              </span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Ногтевая эстетика</h3>
+              <p class="card-desc">Аппаратный маникюр, европейский педикюр, укрепление и дизайн премиальными покрытиями Luxio.</p>
+              <div class="card-foot">
+                <div class="card-price"><small>Стоимость</small>от 2 500 ₽</div>
+                <button type="button" class="btn btn-primary btn-sm card-book" data-direct-book="nails">Записаться</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 · lashes -->
+          <article class="service-card reveal reveal-d2" data-id="lashes" data-cat="lashes" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Архитектура взгляда — открыть детали">
+            <div class="card-media">
+              <img src="service3.jpg" alt="Архитектура взгляда — наращивание ресниц" loading="lazy" />
+              <span class="card-cat">Взгляд</span>
+              <span class="card-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                75 мин
+              </span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Архитектура взгляда</h3>
+              <p class="card-desc">Наращивание и ламинирование ресниц, биозавивка бровей, окрашивание. Модельный изгиб под ваш взгляд.</p>
+              <div class="card-foot">
+                <div class="card-price"><small>Стоимость</small>от 2 800 ₽</div>
+                <button type="button" class="btn btn-primary btn-sm card-book" data-direct-book="lashes">Записаться</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4 · cosmo -->
+          <article class="service-card reveal reveal-d3" data-id="cosmo" data-cat="cosmo" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Эстетическая косметология — открыть детали">
+            <div class="card-media">
+              <img src="service4.jpg" alt="Эстетическая косметология — уход Comfort Zone" loading="lazy" />
+              <span class="card-cat">Косметология</span>
+              <span class="card-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                60 мин
+              </span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Эстетическая косметология</h3>
+              <p class="card-desc">Anti-age программы, пилинги и инъекционные методики. Протоколы Comfort Zone с медицинским контролем.</p>
+              <div class="card-foot">
+                <div class="card-price"><small>Стоимость</small>от 5 200 ₽</div>
+                <button type="button" class="btn btn-primary btn-sm card-book" data-direct-book="cosmo">Записаться</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5 · pmu -->
+          <article class="service-card reveal reveal-d4" data-id="pmu" data-cat="pmu" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Перманентный макияж — открыть детали">
+            <div class="card-media">
+              <img src="service5.jpg" alt="Перманентный макияж — техники пудрового напыления" loading="lazy" />
+              <span class="card-cat">Перманент</span>
+              <span class="card-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                150 мин
+              </span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Перманентный макияж</h3>
+              <p class="card-desc">Брови в технике пудрового напыления, межресничка, акварельные губы. Гипоаллергенные пигменты.</p>
+              <div class="card-foot">
+                <div class="card-price"><small>Стоимость</small>от 6 500 ₽</div>
+                <button type="button" class="btn btn-primary btn-sm card-book" data-direct-book="pmu">Записаться</button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6 · spa -->
+          <article class="service-card reveal reveal-d5" data-id="spa" data-cat="spa" tabindex="0" role="button" aria-haspopup="dialog" aria-label="Массаж и SPA — открыть детали">
+            <div class="card-media">
+              <img src="service6.jpg" alt="Массаж и SPA-ритуалы" loading="lazy" />
+              <span class="card-cat">SPA</span>
+              <span class="card-time">
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                90 мин
+              </span>
+            </div>
+            <div class="card-body">
+              <h3 class="card-title">Массаж &amp; SPA</h3>
+              <p class="card-desc">Расслабляющий и дренажный массаж, обёртки, SPA-ритуалы в приватной комнате с ароматерапией.</p>
+              <div class="card-foot">
+                <div class="card-price"><small>Стоимость</small>от 4 800 ₽</div>
+                <button type="button" class="btn btn-primary btn-sm card-book" data-direct-book="spa">Записаться</button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       D. MASTERS — warm sand background (CRITICAL FIX)
+       ============================================================ -->
+    <section class="section masters" id="masters">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Команда ателье</span>
+            <h2 class="section-title">Мастера высокого полёта</h2>
+          </div>
+          <p class="section-sub">Каждый мастер — практикующий эксперт с международными стажировками и собственным почерком.</p>
+        </div>
+
+        <div class="masters-grid">
+
+          <!-- Master 1 -->
+          <article class="master-card reveal">
+            <div class="master-photo">
+              <span class="exp-badge">Опыт <b>14 лет</b></span>
+              <img src="master1.jpg" alt="Анна Верещагина — Art Director" loading="lazy" />
+            </div>
+            <div class="master-info">
+              <h3 class="master-name">Анна Верещагина</h3>
+              <span class="master-role">Art Director</span>
+              <p class="master-bio">Основатель стиля ателье. Эксперт по стрижкам и сложному окрашиванию, стилист съёмок Mercedes Benz Fashion Week.</p>
+              <div class="master-spec"><span>Стрижки</span><span>Color-дизайн</span><span>Kérastase</span></div>
+            </div>
+          </article>
+
+          <!-- Master 2 -->
+          <article class="master-card reveal reveal-d1">
+            <div class="master-photo">
+              <span class="exp-badge">Опыт <b>9 лет</b></span>
+              <img src="master2.jpg" alt="София Лин — Top Colorist" loading="lazy" />
+            </div>
+            <div class="master-info">
+              <h3 class="master-name">София Лин</h3>
+              <span class="master-role">Top Colorist</span>
+              <p class="master-bio">Специалист по блондам и реставрации цвета. Сертифицированный колорист Lebel и Davines, стажировка в Милане.</p>
+              <div class="master-spec"><span>Блонды</span><span>AirTouch</span><span>Уход Lebel</span></div>
+            </div>
+          </article>
+
+          <!-- Master 3 -->
+          <article class="master-card reveal reveal-d2">
+            <div class="master-photo">
+              <span class="exp-badge">Опыт <b>7 лет</b></span>
+              <img src="master3.jpg" alt="Марк Соловьёв — Top Stylist" loading="lazy" />
+            </div>
+            <div class="master-info">
+              <h3 class="master-name">Марк Соловьёв</h3>
+              <span class="master-role">Top Stylist</span>
+              <p class="master-bio">Мужские стрижки, укладки Dyson и вечерний стайлинг. Призёр национального чемпионата парикмахерского искусства.</p>
+              <div class="master-spec"><span>Мужской зал</span><span>Стайлинг</span><span>Dyson</span></div>
+            </div>
+          </article>
+
+          <!-- Master 4 -->
+          <article class="master-card reveal reveal-d3">
+            <div class="master-photo">
+              <span class="exp-badge">Опыт <b>8 лет</b></span>
+              <img src="master4.jpg" alt="Дарья Ким — Beauty Expert" loading="lazy" />
+            </div>
+            <div class="master-info">
+              <h3 class="master-name">Дарья Ким</h3>
+              <span class="master-role">Beauty Expert</span>
+              <p class="master-bio">Косметология, перманентный макияж и эстетика взгляда. Медицинское образование, авторских 400+ процедур в год.</p>
+              <div class="master-spec"><span>Косметология</span><span>Перманент</span><span>Comfort Zone</span></div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       G1. TRUST STRIP
+       ============================================================ -->
+    <section class="trust" aria-label="Почему выбирают Lumière">
+      <div class="container">
+        <div class="trust-grid">
+          <div class="trust-item reveal">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            </div>
+            <h3>Только люкс-косметика</h3>
+            <p>Kérastase, Davines, Comfort Zone, Luxio, Lebel — работаем исключительно с профессиональными линейками.</p>
+          </div>
+          <div class="trust-item reveal reveal-d1">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="9"/></svg>
+            </div>
+            <h3>Стерильность класса «А»</h3>
+            <p>Сухожаровые шкафы, одноразовые расходники и аудит санитарного протокола каждые 30 дней.</p>
+          </div>
+          <div class="trust-item reveal reveal-d2">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            </div>
+            <h3>Онлайн-запись 24/7</h3>
+            <p>Выбор мастера, даты и времени в три касания. Напоминание в WhatsApp за 3 часа до визита.</p>
+          </div>
+          <div class="trust-item reveal reveal-d3">
+            <div class="trust-icon">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </div>
+            <h3>Гарантия стиля</h3>
+            <p>Не понравился результат? Бесплатная коррекция в течение 14 дней — без вопросов и споров.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       G2. REVIEWS — warm sand background, Yandex / 2GIS badges
+       ============================================================ -->
+    <section class="section reviews" id="reviews">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Отзывы гостей</span>
+            <h2 class="section-title">Нам доверяют красоту</h2>
+          </div>
+          <p class="section-sub">Рейтинг 4.9 из 5 на основе 1 200+ отзывов на Яндекс Картах и 2ГИС.</p>
+        </div>
+
+        <div class="reviews-grid">
+
+          <article class="review-card reveal">
+            <div class="review-quote-mark">“</div>
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            </div>
+            <p class="review-text">Хожу к Анне третий год — она единственная, кто понимает меня с полувзгляда. Блонд живой, уход VIP-уровня, атмосфера как в частном клубе. Тверская, 12 — теперь мой адрес.</p>
+            <div class="review-foot">
+              <div class="review-author"><b>Екатерина М.</b><span>Постоянный клиент · 3 года</span></div>
+              <span class="src-badge yandex"><span class="badge-dot" aria-hidden="true"></span>Яндекс Карты</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal reveal-d1">
+            <div class="review-quote-mark">“</div>
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            </div>
+            <p class="review-text">Делала перманент бровей у Дарьи — результат настолько естественный, что подруги думают, это я «сама такая». Отдельное спасибо за стерильность и спокойный протокол процедуры.</p>
+            <div class="review-foot">
+              <div class="review-author"><b>Алина В.</b><span>Клиент ателье</span></div>
+              <span class="src-badge twogis"><span class="badge-dot" aria-hidden="true"></span>2ГИС</span>
+            </div>
+          </article>
+
+          <article class="review-card reveal reveal-d2">
+            <div class="review-quote-mark">“</div>
+            <div class="review-stars" aria-label="Оценка 5 из 5">
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+              <svg viewBox="0 0 24 24"><path d="M12 2l2.9 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l7.1-1.01L12 2z"/></svg>
+            </div>
+            <p class="review-text">Онлайн-запись работает безупречно: выбрал мастера, дату и время за минуту. Марк сделал стрижку перед свадьбой брата — держится идеально. Уровень настоящего ателье.</p>
+            <div class="review-foot">
+              <div class="review-author"><b>Дмитрий Р.</b><span>Клиент мужского зала</span></div>
+              <span class="src-badge yandex"><span class="badge-dot" aria-hidden="true"></span>Яндекс Карты</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       G3. LOCATION + CUSTOM CSS MAP with pulsing pin
+       ============================================================ -->
+    <section class="section location" id="location">
+      <div class="container">
+        <div class="section-head reveal">
+          <div>
+            <span class="section-kicker">Как добраться</span>
+            <h2 class="section-title">Сердце Москвы — Тверская, 12</h2>
+          </div>
+          <p class="section-sub">Отдельный вход со двора, подземная парковка, встречаем гостей у ресепшена.</p>
+        </div>
+
+        <div class="location-grid">
+          <div class="loc-info reveal">
+            <div class="loc-row">
+              <div class="loc-ico">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div>
+                <h4>Адрес</h4>
+                <p>Москва, ул. Тверская, 12<small>3-й этаж, вход со двора · м. Пушкинская / Чеховская — 4 мин пешком</small></p>
+              </div>
+            </div>
+            <div class="loc-row">
+              <div class="loc-ico">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+              </div>
+              <div>
+                <h4>Часы работы</h4>
+                <p>Ежедневно 10:00 — 22:00<small>По записи в нерабочее время — по договорённости</small></p>
+              </div>
+            </div>
+            <div class="loc-row">
+              <div class="loc-ico">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div>
+                <h4>Связь</h4>
+                <p><a href="tel:+74951234567">+7 (495) 123-45-67</a><small>WhatsApp · Telegram · hello@lumiere-studio.ru</small></p>
+              </div>
+            </div>
+            <div class="loc-row">
+              <div class="loc-ico">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M7 6V4h10v2"/></svg>
+              </div>
+              <div>
+                <h4>Парковка</h4>
+                <p>Подземный паркинг БЦ<small>2 часа — бесплатно для клиентов ателье</small></p>
+              </div>
+            </div>
+            <div class="loc-actions" style="margin-top:auto; display:flex; flex-direction:column; gap:12px;">
+              <a class="btn btn-outline btn-block"
+                 href="https://yandex.ru/maps/?text=Москва%2C%20улица%20Тверская%2C%2012"
+                 target="_blank" rel="noopener noreferrer">
+                <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                Открыть в Яндекс Картах
+              </a>
+              <button type="button" class="btn btn-primary btn-block" data-open-booking>Записаться на визит</button>
+            </div>
+          </div>
+
+          <!-- Custom CSS map -->
+          <div class="css-map reveal reveal-d1" role="img" aria-label="Стилизованная карта: Lumière Beauty Studio, улица Тверская, 12, Москва">
+            <div class="map-road road-h" style="top: 34%;"></div>
+            <div class="map-road road-v" style="left: 22%; width: 18px;"></div>
+            <div class="map-road road-v road-main" style="left: 48%; width: 34px; transform: rotate(8deg); top: -6%; bottom: -6%;"></div>
+            <div class="map-road road-h" style="top: 68%;"></div>
+            <div class="map-road road-v" style="left: 76%; width: 14px;"></div>
+            <div class="map-park" style="left: 4%; top: 6%; width: 15%; height: 22%;"></div>
+            <div class="map-park" style="right: 6%; bottom: 10%; width: 18%; height: 24%;"></div>
+            <div class="map-water" style="left: 10%; bottom: 6%; width: 22%; height: 14%;"></div>
+            <div class="map-block" style="left: 30%; top: 12%; width: 10%; height: 14%;"></div>
+            <div class="map-block" style="left: 60%; top: 8%; width: 12%; height: 18%;"></div>
+            <div class="map-block" style="left: 56%; bottom: 16%; width: 14%; height: 16%;"></div>
+            <div class="map-block" style="left: 84%; top: 40%; width: 10%; height: 16%;"></div>
+            <span class="map-label" style="left: 50%; top: 10%; transform: translateX(-50%) rotate(8deg);">ул. Тверская</span>
+            <span class="map-label" style="left: 24%; top: 30%;">Пушкинская пл.</span>
+            <span class="map-label" style="left: 6%; top: 12%;">Сквер</span>
+            <span class="map-label" style="right: 8%; bottom: 36%;">Моховая</span>
+            <div class="map-pin">
+              <div class="map-pin-dot"></div>
+              <div class="map-pin-tip"></div>
+              <div class="map-pin-label"><b>Lumière</b> · Тверская, 12</div>
+            </div>
+            <!-- Route shortcut overlay (bottom-left, clear of the pin & label) -->
+            <a class="btn btn-outline map-route-link"
+               href="https://yandex.ru/maps/?text=Москва%2C%20улица%20Тверская%2C%2012"
+               target="_blank" rel="noopener noreferrer"
+               style="position:absolute; left:18px; bottom:18px; z-index:6; background:#FFFFFF; padding:13px 22px; font-size:11.5px; box-shadow:0 10px 26px rgba(30,27,25,0.14);">
+              <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Построить маршрут
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+       G4. CTA BAND
+       ============================================================ -->
+    <section class="cta-band" aria-label="Записаться">
+      <div class="container">
+        <h2 class="reveal">Ваш новый образ <em>начинается здесь</em></h2>
+        <p class="reveal reveal-d1">Онлайн-запись к топ-мастерам ателье. Свободные окна на ближайшие 7 дней обновляются в реальном времени.</p>
+        <button type="button" class="btn btn-primary reveal reveal-d2" data-open-booking>Забронировать время</button>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       G5. FOOTER — dark theme, legal links target="_blank"
+       ============================================================ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-logo">Lum<i>î</i>re <em>Beauty</em></div>
+          <p class="footer-about">Премиальное бьюти-ателье полного цикла в центре Москвы. Стрижки и окрашивание, ногтевая эстетика, косметология, перманентный макияж и SPA-ритуалы с 2012 года.</p>
+          <div class="footer-socials">
+            <a href="https://wa.me/74951234567" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">WA</a>
+            <a href="https://t.me/lumiere_studio" target="_blank" rel="noopener noreferrer" aria-label="Telegram">TG</a>
+            <a href="https://vk.com/lumiere_studio" target="_blank" rel="noopener noreferrer" aria-label="ВКонтакте">VK</a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram*">IG</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Услуги</h4>
+          <ul>
+            <li><a href="#catalog">Парикмахерское искусство</a></li>
+            <li><a href="#catalog">Ногтевая эстетика</a></li>
+            <li><a href="#catalog">Архитектура взгляда</a></li>
+            <li><a href="#catalog">Косметология</a></li>
+            <li><a href="#catalog">Перманентный макияж</a></li>
+            <li><a href="#catalog">Массаж &amp; SPA</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Ателье</h4>
+          <ul>
+            <li><a href="#masters">Наши мастера</a></li>
+            <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#location">Как добраться</a></li>
+            <li><a href="#" data-open-booking>Онлайн-запись</a></li>
+            <li><a href="tel:+74951234567">+7 (495) 123-45-67</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Контакты</h4>
+          <ul>
+            <li>Москва, ул. Тверская, 12</li>
+            <li>Ежедневно 10:00 — 22:00</li>
+            <li><a href="mailto:hello@lumiere-studio.ru">hello@lumiere-studio.ru</a></li>
+            <li>ООО «Люмьер Ателье»</li>
+            <li>ИНН 7700000000 · ОГРН 1127700000000</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2012–2026 Lumière Beauty Studio. Все права защищены. Лицензия № ЛО-77-04-000000.</span>
+        <nav class="footer-legal" aria-label="Правовая информация">
+          <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Политика конфиденциальности</a>
+          <a href="consent.html" target="_blank" rel="noopener noreferrer">Согласие на обработку данных</a>
+          <a href="terms.html" target="_blank" rel="noopener noreferrer">Пользовательское соглашение</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================
+       FLOATING WHATSAPP BUTTON
+       ============================================================ -->
+  <a class="wa-float" href="https://wa.me/74951234567?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F%20%D0%B2%20Lumi%C3%A8re" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
+    <span class="wa-pulse-ring" aria-hidden="true"></span>
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.004 3.2c-7.06 0-12.8 5.74-12.8 12.8 0 2.26.594 4.466 1.724 6.406L3.2 28.8l6.556-1.718a12.74 12.74 0 0 0 6.244 1.62h.004c7.06 0 12.796-5.74 12.796-12.8s-5.74-12.8-12.8-12.8zm0 23.466h-.004a10.6 10.6 0 0 1-5.404-1.48l-.388-.23-3.89 1.02 1.04-3.796-.254-.392a10.616 10.616 0 0 1-1.626-5.686c0-5.874 4.782-10.656 10.66-10.656 2.848 0 5.524 1.11 7.54 3.124a10.59 10.59 0 0 1 3.116 7.54c0 5.876-4.782 10.656-10.79 10.656zm5.858-8.002c-.32-.16-1.904-.94-2.198-1.046-.294-.108-.508-.16-.72.162-.214.32-.83 1.046-1.018 1.26-.188.214-.374.236-.694.078-.32-.16-1.356-.5-2.582-1.592-.954-.85-1.598-1.9-1.786-2.22-.188-.32-.02-.492.14-.652.146-.146.32-.374.482-.562.16-.188.214-.32.32-.534.108-.214.054-.402-.026-.562-.08-.16-.746-1.786-1.02-2.444-.27-.642-.542-.554-.746-.564-.188-.008-.402-.01-.616-.01-.214 0-.562.08-.856.402-.294.32-1.124 1.1-1.124 2.68 0 1.582 1.15 3.11 1.31 3.324.16.214 2.258 3.446 5.47 4.834.764.33 1.36.526 1.824.674.766.244 1.464.21 2.016.128.614-.092 1.904-.78 2.174-1.534.268-.752.268-1.396.188-1.532-.078-.136-.292-.216-.612-.376z"/></svg>
+    <span class="wa-tooltip">Написать в WhatsApp</span>
+  </a>
+
+  <!-- ============================================================
+       COOKIE BANNER (localStorage persistence)
+       ============================================================ -->
+  <div id="cookieBanner" role="dialog" aria-live="polite" aria-label="Уведомление об использовании cookie-файлов">
+    <div class="container cookie-inner">
+      <p class="cookie-text">Мы используем файлы cookie для корректной работы сайта и аналитики. Оставаясь на сайте, вы соглашаетесь с <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a> и обработкой персональных данных согласно 152-ФЗ.</p>
+      <div class="cookie-actions">
+        <button type="button" class="btn-cookie-decline" id="cookieDecline">Только необходимые</button>
+        <button type="button" class="btn-cookie-accept" id="cookieAccept">Принять</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       E. SERVICE DETAIL MODAL
+       ============================================================ -->
+  <dialog id="serviceDetailModal" aria-label="Детали услуги">
+    <div class="modal-shell">
+      <div class="modal-panel">
+        <button type="button" class="modal-close" data-close-dialog aria-label="Закрыть окно">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+        <div class="detail-grid">
+          <div class="detail-media">
+            <img id="detailImg" src="" alt="" />
+            <span class="detail-cat" id="detailCat"></span>
+          </div>
+          <div class="detail-body">
+            <h3 class="detail-title" id="detailTitle"></h3>
+            <div class="detail-meta">
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+                <span id="detailTime"></span>
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L12 22 2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5"/></svg>
+                от <span id="detailPrice"></span>
+              </span>
+              <span>
+                <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Топ-мастер
+              </span>
+            </div>
+            <p class="detail-desc" id="detailDesc"></p>
+            <div class="detail-block">
+              <h4>Протокол сеанса</h4>
+              <ul class="protocol-list" id="detailProtocol"></ul>
+            </div>
+            <div class="detail-block">
+              <h4>Стоимость</h4>
+              <div class="price-table" id="detailPrices"></div>
+            </div>
+            <div class="detail-cta">
+              <button type="button" class="btn btn-primary btn-block" id="detailToBooking">Перейти к записи</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============================================================
+       F. BOOKING WIZARD — YCLIENTS-STYLE, 4 STEPS
+       ============================================================ -->
+  <dialog id="bookingModal" aria-label="Онлайн-запись">
+    <div class="modal-shell">
+      <div class="modal-panel">
+        <button type="button" class="modal-close" data-close-dialog aria-label="Закрыть окно записи">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+
+        <div class="wiz-header">
+          <div class="wiz-brand">Lumière · Онлайн-запись</div>
+          <h3 class="wiz-heading">Забронируйте визит</h3>
+          <div class="wiz-progress" aria-hidden="true">
+            <div class="wiz-step-dot active" data-dot="1">1</div>
+            <div class="wiz-step-line" data-line="1"></div>
+            <div class="wiz-step-dot" data-dot="2">2</div>
+            <div class="wiz-step-line" data-line="2"></div>
+            <div class="wiz-step-dot" data-dot="3">3</div>
+            <div class="wiz-step-line" data-line="3"></div>
+            <div class="wiz-step-dot" data-dot="4">4</div>
+          </div>
+          <div class="wiz-step-labels" aria-hidden="true">
+            <span class="active" data-label="1">Услуга</span>
+            <span data-label="2">Мастер</span>
+            <span data-label="3">Время</span>
+            <span data-label="4">Контакты</span>
+          </div>
+        </div>
+
+        <div class="wiz-viewport">
+          <div class="wiz-track" id="wizTrack">
+
+            <!-- STEP 1: Category + Service -->
+            <section class="wiz-pane" data-pane="1">
+              <div class="wiz-pane-title">Шаг 1 · Выберите категорию</div>
+              <div class="wiz-cats" id="wizCats" role="tablist" aria-label="Категории услуг">
+                <button type="button" class="wiz-cat active" data-wcat="all">Все</button>
+                <button type="button" class="wiz-cat" data-wcat="hair">Волосы</button>
+                <button type="button" class="wiz-cat" data-wcat="nails">Ногти</button>
+                <button type="button" class="wiz-cat" data-wcat="lashes">Взгляд</button>
+                <button type="button" class="wiz-cat" data-wcat="cosmo">Косметология</button>
+                <button type="button" class="wiz-cat" data-wcat="pmu">Перманент</button>
+                <button type="button" class="wiz-cat" data-wcat="spa">SPA</button>
+              </div>
+              <div class="wiz-pane-title">Выберите услугу</div>
+              <div class="opt-list" id="wizServices"></div>
+            </section>
+
+            <!-- STEP 2: Master -->
+            <section class="wiz-pane" data-pane="2">
+              <div class="wiz-pane-title">Шаг 2 · Выберите мастера</div>
+              <div class="opt-list" id="wizMasters"></div>
+            </section>
+
+            <!-- STEP 3: Date + Time -->
+            <section class="wiz-pane" data-pane="3">
+              <div class="wiz-pane-title">Шаг 3 · Выберите дату</div>
+              <div class="dates-scroll" id="wizDates"></div>
+              <div class="wiz-pane-title">Свободное время</div>
+              <div class="times-grid" id="wizTimes"></div>
+            </section>
+
+            <!-- STEP 4: Contacts -->
+            <section class="wiz-pane" data-pane="4">
+              <div class="wiz-summary" id="wizSummary"></div>
+              <div class="field" id="fieldName">
+                <label for="bookName">Ваше имя</label>
+                <input type="text" id="bookName" name="name" placeholder="Например, Анна" autocomplete="given-name" maxlength="60" />
+                <div class="field-error">Пожалуйста, укажите имя (минимум 2 символа)</div>
+              </div>
+              <div class="field" id="fieldPhone">
+                <label for="bookPhone">Телефон</label>
+                <input type="tel" id="bookPhone" name="phone" placeholder="+7 (___) ___-__-__" inputmode="tel" autocomplete="tel" />
+                <div class="field-error">Введите полный номер телефона</div>
+              </div>
+              <label class="consent-row" id="consentRow">
+                <input type="checkbox" id="bookConsent" />
+                <span>Я даю согласие на обработку персональных данных в соответствии с <a href="consent.html" target="_blank" rel="noopener noreferrer">152-ФЗ</a> и <a href="privacy-policy.html" target="_blank" rel="noopener noreferrer">Политикой конфиденциальности</a>.</span>
+              </label>
+            </section>
+
+          </div>
+
+          <!-- Success screen overlaying panes -->
+          <div class="wiz-success" id="wizSuccess" role="status">
+            <div class="success-ring">
+              <svg viewBox="0 0 24 24" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            </div>
+            <h3>Вы записаны!</h3>
+            <p class="succ-detail" id="succDetail"></p>
+            <p>Администратор подтвердит запись звонком в течение 15 минут. Мы отправим напоминание в WhatsApp за 3 часа до визита.</p>
+            <button type="button" class="btn btn-primary" data-close-dialog>Отлично</button>
+          </div>
+        </div>
+
+        <div class="wiz-footer">
+          <button type="button" class="wiz-back invisible" id="wizBackBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Назад
+          </button>
+          <button type="button" class="btn btn-primary" id="wizNextBtn" disabled>Далее</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ============================================================
+       VANILLA JS — ALL BEHAVIOUR
+       ============================================================ -->
+  <script>
+    'use strict';
+
+    /* ==============================================================
+       DATA LAYER — services, masters, protocols, price lists
+       ============================================================== */
+    const SERVICES = [
+      {
+        id: 'hair', img: 'service1.jpg', cat: 'hair', catLabel: 'Волосы',
+        title: 'Парикмахерское искусство', time: '120 мин', price: 4500,
+        desc: 'Авторские стрижки, сложное окрашивание и уход Kérastase / Lebel. Цветокоррекция под тип внешности, реконструкция полотна и салонный укладочный стайлинг.',
+        protocol: [
+          'Диагностика кожи головы и структуры волос',
+          'Мягкое очищение линией Kérastase Specifique',
+          'Стрижка или окрашивание по выбранной технике',
+          'Уходовая маска и запечатывание кутикулы Lebel',
+          'Укладка Dyson и домашние рекомендации стилиста'
+        ],
+        prices: [
+          ['Женская стрижка + укладка', 'от 4 500 ₽'],
+          ['Мужская стрижка', 'от 3 000 ₽'],
+          ['Сложное окрашивание (AirTouch, Balayage)', 'от 9 800 ₽'],
+          ['Уход-реконструкция Kérastase Fusio-Dose', 'от 5 200 ₽']
+        ]
+      },
+      {
+        id: 'nails', img: 'service2.jpg', cat: 'nails', catLabel: 'Ногти',
+        title: 'Ногтевая эстетика', time: '90 мин', price: 2500,
+        desc: 'Аппаратный маникюр, европейский педикюр, укрепление и дизайн премиальными покрытиями Luxio. Стерильность класса «А» и аккуратная архитектура ногтя.',
+        protocol: [
+          'Антисептическая обработка и осмотр мастера',
+          'Аппаратный маникюр без обрезного травмирования',
+          'Выравнивание базы и архитектура свободного края',
+          'Покрытие Luxio гель-лаком / дизайн по желанию',
+          'Масло для кутикулы и финишный уход'
+        ],
+        prices: [
+          ['Маникюр + покрытие Luxio', 'от 2 500 ₽'],
+          ['Педикюр аппаратный + покрытие', 'от 3 800 ₽'],
+          ['Укрепление и выравнивание', '+900 ₽'],
+          ['Дизайн (стемпинг, французский)', 'от 600 ₽']
+        ]
+      },
+      {
+        id: 'lashes', img: 'service3.jpg', cat: 'lashes', catLabel: 'Взгляд',
+        title: 'Архитектура взгляда', time: '75 мин', price: 2800,
+        desc: 'Наращивание и ламинирование ресниц, биозавивка и окрашивание бровей. Модельный изгиб и эффект подбираются индивидуально под разрез глаз.',
+        protocol: [
+          'Подбор изгиба, длины и эффекта (классика / 3D)',
+          'Обезжиривание и защита нижнего века',
+          'Наращивание гипоаллергенными материалами',
+          'Окрашивание или ламинирование бровей',
+          'Финальный осмотр и карта ухода'
+        ],
+        prices: [
+          ['Наращивание — классика', 'от 2 800 ₽'],
+          ['Наращивание 2D / 3D объём', 'от 3 900 ₽'],
+          ['Ламинирование ресниц', 'от 2 600 ₽'],
+          ['Архитектура + окрашивание бровей', 'от 1 800 ₽']
+        ]
+      },
+      {
+        id: 'cosmo', img: 'service4.jpg', cat: 'cosmo', catLabel: 'Косметология',
+        title: 'Эстетическая косметология', time: '60 мин', price: 5200,
+        desc: 'Anti-age программы, пилинги и инъекционные методики. Протоколы Comfort Zone с медицинским контролем и индивидуальной картой кожи.',
+        protocol: [
+          'Консультация и диагностика состояния кожи',
+          'Демакияж и мягкий очищающий протокол',
+          'Активная фаза: пилинг / мезотерапия / биоревитализация',
+          'Успокаивающая маска Comfort Zone',
+          'SPF-финиш и план домашних процедур'
+        ],
+        prices: [
+          ['Комплексный anti-age уход', 'от 5 200 ₽'],
+          ['Биоревитализация', 'от 12 900 ₽'],
+          ['Химический пилинг PRX-T33', 'от 6 800 ₽'],
+          ['Мезотерапия лица', 'от 8 400 ₽']
+        ]
+      },
+      {
+        id: 'pmu', img: 'service5.jpg', cat: 'pmu', catLabel: 'Перманент',
+        title: 'Перманентный макияж', time: '150 мин', price: 6500,
+        desc: 'Брови в технике пудрового напыления, межресничка, акварельные губы. Гипоаллергенные пигменты, 3D-эскиз и бесшовное растушёвание.',
+        protocol: [
+          'Эскиз и подбор оттенка пигмента',
+          'Аппликационная анестезия',
+          'Аппаратное введение пигмента (помадная / powder-техника)',
+          'Контроль симметрии и финальная растушёвка',
+          'Памятка по заживлению + коррекция через 4–6 недель'
+        ],
+        prices: [
+          ['Перманент бровей (пудровое напыление)', 'от 6 500 ₽'],
+          ['Межресничка', 'от 5 500 ₽'],
+          ['Акварельные губы full-cover', 'от 9 500 ₽'],
+          ['Коррекция (через 4–6 недель)', 'от 3 500 ₽']
+        ]
+      },
+      {
+        id: 'spa', img: 'service6.jpg', cat: 'spa', catLabel: 'SPA',
+        title: 'Массаж & SPA', time: '90 мин', price: 4800,
+        desc: 'Расслабляющий и дренажный массаж, обёртки, SPA-ритуалы в приватной комнате с ароматерапией, тёплым мрамором и тишиной.',
+        protocol: [
+          'Ароматерапия и согревающий ритуал входа',
+          'Индивидуальный массаж: расслабляющий / дренажный / спортивный',
+          'Обёртка или скрабирование по выбору',
+          'Травяной чай и отдых в лаунж-зоне',
+          'Рекомендации по режиму восстановления'
+        ],
+        prices: [
+          ['Классический массаж тела (90 мин)', 'от 4 800 ₽'],
+          ['Лимфодренажный массаж', 'от 5 400 ₽'],
+          ['SPA-ритуал «Шоколадный бархат»', 'от 7 900 ₽'],
+          ['Массаж спины + шейно-воротниковая зона', 'от 3 200 ₽']
+        ]
+      }
+    ];
+
+    const MASTERS = [
+      { id: 'm1', photo: 'master1.jpg', name: 'Анна Верещагина', role: 'Art Director', exp: 14, cats: ['hair'] },
+      { id: 'm2', photo: 'master2.jpg', name: 'София Лин',     role: 'Top Colorist',  exp: 9,  cats: ['hair', 'nails'] },
+      { id: 'm3', photo: 'master3.jpg', name: 'Марк Соловьёв', role: 'Top Stylist',   exp: 7,  cats: ['hair', 'spa'] },
+      { id: 'm4', photo: 'master4.jpg', name: 'Дарья Ким',     role: 'Beauty Expert', exp: 8,  cats: ['lashes', 'cosmo', 'pmu'] }
+    ];
+
+    const TIME_SLOTS = ['10:00', '12:30', '15:00', '17:30', '19:30'];
+
+    const WEEKDAYS_SHORT = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+    const MONTHS_GEN = ['янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
+    const MONTHS_FULL = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+
+    const fmtMoney = (n) => n.toLocaleString('ru-RU') + ' ₽';
+
+    /* ==============================================================
+       A. PRELOADER LOGIC
+       load → wait 1200ms → fade out (pointer-events none) →
+       wait 600ms → remove() from DOM
+       ============================================================== */
+    (function initPreloader() {
+      const pre = document.getElementById('preloader');
+      if (!pre) return;
+
+      let started = false;
+      const dismiss = () => {
+        if (started) return;
+        started = true;
+        setTimeout(() => {
+          pre.classList.add('fade-out');
+          pre.style.pointerEvents = 'none';
+          setTimeout(() => {
+            if (pre.parentNode) pre.remove();
+          }, 600);
+        }, 1200);
+      };
+
+      window.addEventListener('load', dismiss);
+      // Safety net: never trap the user behind the preloader
+      setTimeout(dismiss, 3500);
+    })();
+
+    /* ==============================================================
+       HEADER SCROLL STATE
+       ============================================================== */
+    (function initHeader() {
+      const header = document.getElementById('siteHeader');
+      const onScroll = () => {
+        header.classList.toggle('scrolled', window.scrollY > 40);
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    })();
+
+    /* ==============================================================
+       BURGER MENU — fullscreen dark overlay
+       ============================================================== */
+    (function initBurger() {
+      const burger = document.getElementById('burgerBtn');
+      const menu = document.getElementById('mobileMenu');
+      const body = document.body;
+
+      const closeMenu = () => {
+        body.classList.remove('menu-open');
+        burger.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+        body.classList.remove('no-scroll');
+      };
+
+      burger.addEventListener('click', () => {
+        const isOpen = body.classList.contains('menu-open');
+        if (isOpen) {
+          closeMenu();
+        } else {
+          body.classList.add('menu-open');
+          body.classList.add('no-scroll');
+          burger.setAttribute('aria-expanded', 'true');
+          menu.setAttribute('aria-hidden', 'false');
+        }
+      });
+
+      // Any link inside overlay closes it first
+      menu.querySelectorAll('a').forEach((link) => {
+        link.addEventListener('click', () => {
+          closeMenu();
+        });
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+      });
+    })();
+
+    /* ==============================================================
+       REVEAL ON SCROLL — Intersection Observer
+       ============================================================== */
+    (function initReveal() {
+      const items = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        items.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+      items.forEach((el) => io.observe(el));
+    })();
+
+    /* ==============================================================
+       CATALOG FILTER TABS
+       ============================================================== */
+    (function initTabs() {
+      const tabs = document.querySelectorAll('.filter-tab');
+      const cards = document.querySelectorAll('.service-card');
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => {
+          tabs.forEach((t) => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+          });
+          tab.classList.add('active');
+          tab.setAttribute('aria-selected', 'true');
+
+          const filter = tab.dataset.filter;
+          cards.forEach((card) => {
+            const show = filter === 'all' || card.dataset.cat === filter;
+            card.classList.toggle('hidden-card', !show);
+            if (show) card.classList.add('is-visible');
+          });
+        });
+      });
+    })();
+
+    /* ==============================================================
+       MODAL MANAGER (<dialog> helpers)
+       ============================================================== */
+    const detailModal = document.getElementById('serviceDetailModal');
+    const bookingModal = document.getElementById('bookingModal');
+
+    function lockPage(open) {
+      document.body.classList.toggle('no-scroll', open);
+    }
+
+    function safeOpen(dialog) {
+      if (!dialog.open) {
+        if (typeof dialog.showModal === 'function') dialog.showModal();
+        else dialog.setAttribute('open', '');
+      }
+      lockPage(true);
+    }
+
+    function safeClose(dialog) {
+      if (dialog.open) {
+        if (typeof dialog.close === 'function') dialog.close();
+        else dialog.removeAttribute('open');
+      }
+      // Keep page locked if another dialog is still open
+      if (!detailModal.open && !bookingModal.open) lockPage(false);
+    }
+
+    document.querySelectorAll('[data-close-dialog]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const dlg = btn.closest('dialog');
+        if (dlg) safeClose(dlg);
+      });
+    });
+
+    // Click on backdrop (shell padding area) closes dialogs
+    [detailModal, bookingModal].forEach((dlg) => {
+      const shell = dlg.querySelector('.modal-shell');
+      shell.addEventListener('click', (e) => {
+        if (e.target === shell) safeClose(dlg);
+      });
+    });
+
+    // Native Esc also unlocks scroll
+    detailModal.addEventListener('close', () => { if (!bookingModal.open) lockPage(false); });
+    bookingModal.addEventListener('close', () => { if (!detailModal.open) lockPage(false); });
+
+    /* ==============================================================
+       E. SERVICE DETAIL MODAL LOGIC
+       Card click → fill dialog → showModal.
+       "Перейти к записи" → close detail, open booking pre-selected.
+       ============================================================== */
+    let currentDetailServiceId = null;
+
+    function openDetailModal(serviceId) {
+      const s = SERVICES.find((x) => x.id === serviceId);
+      if (!s) return;
+      currentDetailServiceId = s.id;
+
+      const img = document.getElementById('detailImg');
+      img.src = s.img;
+      img.alt = s.title;
+      document.getElementById('detailCat').textContent = s.catLabel;
+      document.getElementById('detailTitle').textContent = s.title;
+      document.getElementById('detailTime').textContent = s.time;
+      document.getElementById('detailPrice').textContent = fmtMoney(s.price);
+      document.getElementById('detailDesc').textContent = s.desc;
+
+      const protoUl = document.getElementById('detailProtocol');
+      protoUl.innerHTML = '';
+      s.protocol.forEach((step) => {
+        const li = document.createElement('li');
+        li.textContent = step;
+        protoUl.appendChild(li);
+      });
+
+      const priceBox = document.getElementById('detailPrices');
+      priceBox.innerHTML = '';
+      s.prices.forEach(([label, value]) => {
+        const row = document.createElement('div');
+        row.className = 'price-row';
+        const span = document.createElement('span');
+        span.textContent = label;
+        const b = document.createElement('b');
+        b.textContent = value;
+        row.appendChild(span);
+        row.appendChild(b);
+        priceBox.appendChild(row);
+      });
+
+      safeOpen(detailModal);
+    }
+
+    // Entire card opens the detail dialog (buttons inside are handled separately)
+    document.querySelectorAll('.service-card').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('[data-direct-book]')) return; // direct-book handles itself
+        openDetailModal(card.dataset.id);
+      });
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openDetailModal(card.dataset.id);
+        }
+      });
+    });
+
+    document.getElementById('detailToBooking').addEventListener('click', () => {
+      const id = currentDetailServiceId;
+      safeClose(detailModal);
+      setTimeout(() => openBooking(id), 120);
+    });
+
+    // Cards' "Записаться" button — direct booking with pre-selected service
+    document.querySelectorAll('[data-direct-book]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openBooking(btn.getAttribute('data-direct-book'));
+      });
+    });
+
+    /* ==============================================================
+       F. BOOKING WIZARD — YCLIENTS-STYLE STATE MACHINE
+       ============================================================== */
+    const wizState = {
+      step: 1,
+      category: 'all',
+      serviceId: null,
+      masterId: null,   // 'any' or master id
+      dateISO: null,
+      time: null,
+      name: '',
+      phone: ''
+    };
+
+    const wizTrack = document.getElementById('wizTrack');
+    const wizNextBtn = document.getElementById('wizNextBtn');
+    const wizBackBtn = document.getElementById('wizBackBtn');
+    const wizSuccess = document.getElementById('wizSuccess');
+
+    const CHECK_SVG = '<svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+
+    /* ---------- Step 1 renderers ---------- */
+    function renderWizServices() {
+      const box = document.getElementById('wizServices');
+      box.innerHTML = '';
+      SERVICES.forEach((s) => {
+        const visible = wizState.category === 'all' || s.cat === wizState.category;
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'opt-item' + (visible ? '' : ' hidden-opt') + (wizState.serviceId === s.id ? ' selected' : '');
+        item.dataset.service = s.id;
+        item.innerHTML =
+          '<span class="opt-check">' + CHECK_SVG + '</span>' +
+          '<span class="opt-main"><span class="opt-name">' + s.title + '</span>' +
+          '<span class="opt-sub">' + s.time + ' · ' + s.catLabel + '</span></span>' +
+          '<span class="opt-price">от ' + s.price.toLocaleString('ru-RU') + ' ₽</span>';
+        item.addEventListener('click', () => {
+          wizState.serviceId = s.id;
+          // Service change invalidates master choice if it can't perform it
+          if (wizState.masterId && wizState.masterId !== 'any') {
+            const m = MASTERS.find((x) => x.id === wizState.masterId);
+            if (!m || m.cats.indexOf(s.cat) === -1) wizState.masterId = null;
+          }
+          renderWizServices();
+          renderWizMasters();
+          updateWizardUI();
+        });
+        box.appendChild(item);
+      });
+    }
+
+    document.querySelectorAll('.wiz-cat').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.wiz-cat').forEach((c) => c.classList.remove('active'));
+        chip.classList.add('active');
+        wizState.category = chip.dataset.wcat;
+        renderWizServices();
+      });
+    });
+
+    /* ---------- Step 2 renderer ---------- */
+    function renderWizMasters() {
+      const box = document.getElementById('wizMasters');
+      box.innerHTML = '';
+
+      const svc = SERVICES.find((s) => s.id === wizState.serviceId);
+
+      // "Любой свободный мастер" first
+      const anyBtn = document.createElement('button');
+      anyBtn.type = 'button';
+      anyBtn.className = 'opt-item' + (wizState.masterId === 'any' ? ' selected' : '');
+      anyBtn.innerHTML =
+        '<span class="opt-photo-any">✦</span>' +
+        '<span class="opt-main"><span class="opt-name">Любой свободный мастер</span>' +
+        '<span class="opt-sub">Запишем к ближайшему доступному эксперту</span></span>' +
+        '<span class="opt-check">' + CHECK_SVG + '</span>';
+      anyBtn.addEventListener('click', () => {
+        wizState.masterId = 'any';
+        renderWizMasters();
+        updateWizardUI();
+      });
+      box.appendChild(anyBtn);
+
+      MASTERS.forEach((m) => {
+        const eligible = !svc || m.cats.indexOf(svc.cat) !== -1;
+        const item = document.createElement('button');
+        item.type = 'button';
+        item.className = 'opt-item' + (eligible ? '' : ' hidden-opt') + (wizState.masterId === m.id ? ' selected' : '');
+        item.innerHTML =
+          '<img class="opt-photo" src="' + m.photo + '" alt="' + m.name + '" loading="lazy" />' +
+          '<span class="opt-main"><span class="opt-name">' + m.name + '</span>' +
+          '<span class="opt-sub">' + m.role + ' · Опыт ' + m.exp + ' лет</span></span>' +
+          '<span class="opt-check">' + CHECK_SVG + '</span>';
+        item.addEventListener('click', () => {
+          wizState.masterId = m.id;
+          renderWizMasters();
+          updateWizardUI();
+        });
+        box.appendChild(item);
+      });
+    }
+
+    /* ---------- Step 3 renderers: dates + times ---------- */
+    function buildDates() {
+      const box = document.getElementById('wizDates');
+      box.innerHTML = '';
+      const today = new Date();
+      for (let i = 0; i < 7; i++) {
+        const d = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
+        const iso = d.toISOString().slice(0, 10);
+        const chip = document.createElement('button');
+        chip.type = 'button';
+        chip.className = 'date-chip' + (wizState.dateISO === iso ? ' selected' : '');
+        chip.dataset.date = iso;
+        const weekName = i === 0 ? 'Сегодня' : (i === 1 ? 'Завтра' : WEEKDAYS_SHORT[d.getDay()]);
+        chip.innerHTML =
+          '<span class="d-week">' + weekName + '</span>' +
+          '<span class="d-day">' + d.getDate() + '</span>' +
+          '<span class="d-month">' + MONTHS_GEN[d.getMonth()] + '</span>';
+        chip.addEventListener('click', () => {
+          wizState.dateISO = iso;
+          box.querySelectorAll('.date-chip').forEach((c) => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          renderTimes(iso);
+          updateWizardUI();
+        });
+        box.appendChild(chip);
+      }
+    }
+
+    function renderTimes(dateISO) {
+      const box = document.getElementById('wizTimes');
+      box.innerHTML = '';
+      // Deterministic pseudo-availability from date string (demo realism)
+      let seed = 0;
+      for (let i = 0; i < dateISO.length; i++) seed += dateISO.charCodeAt(i) * (i + 3);
+
+      TIME_SLOTS.forEach((t, idx) => {
+        const taken = (seed + idx * 7) % 5 === 0; // some slots busy
+        const slot = document.createElement('button');
+        slot.type = 'button';
+        slot.className = 'time-slot' + (wizState.time === t ? ' selected' : '');
+        slot.textContent = t;
+        if (taken) {
+          slot.disabled = true;
+          slot.style.opacity = '0.35';
+          slot.style.textDecoration = 'line-through';
+          slot.title = 'Время занято';
+        } else {
+          slot.addEventListener('click', () => {
+            wizState.time = t;
+            box.querySelectorAll('.time-slot').forEach((s) => s.classList.remove('selected'));
+            slot.classList.add('selected');
+            updateWizardUI();
+          });
+        }
+        box.appendChild(slot);
+      });
+    }
+
+    /* ---------- Step 4 summary ---------- */
+    function renderSummary() {
+      const svc = SERVICES.find((s) => s.id === wizState.serviceId);
+      const mst = wizState.masterId === 'any'
+        ? 'Любой свободный мастер'
+        : (MASTERS.find((m) => m.id === wizState.masterId) || {}).name || '—';
+      let dateTxt = '—';
+      if (wizState.dateISO) {
+        const parts = wizState.dateISO.split('-');
+        dateTxt = Number(parts[2]) + ' ' + MONTHS_FULL[Number(parts[1]) - 1];
+      }
+      document.getElementById('wizSummary').innerHTML =
+        '<b>' + (svc ? svc.title : '—') + '</b><br>' +
+        'Мастер: ' + mst + '<br>' +
+        'Дата: ' + dateTxt + (wizState.time ? ' · ' + wizState.time : '') + '<br>' +
+        'Стоимость: от ' + (svc ? fmtMoney(svc.price) : '—');
+    }
+
+    /* ---------- Wizard navigation & validation ---------- */
+    function stepIsValid(step) {
+      switch (step) {
+        case 1: return !!wizState.serviceId;
+        case 2: return !!wizState.masterId;
+        case 3: return !!wizState.dateISO && !!wizState.time;
+        case 4: {
+          const nameOk = wizState.name.trim().length >= 2;
+          const digits = wizState.phone.replace(/\D/g, '');
+          const phoneOk = digits.length === 11;
+          const consentOk = document.getElementById('bookConsent').checked;
+          return nameOk && phoneOk && consentOk;
+        }
+        default: return false;
+      }
+    }
+
+    function goToStep(step) {
+      wizState.step = Math.min(4, Math.max(1, step));
+      // Sliding transition
+      wizTrack.style.transform = 'translateX(-' + ((wizState.step - 1) * 100) + '%)';
+
+      // Progress dots / lines / labels
+      document.querySelectorAll('.wiz-step-dot').forEach((dot) => {
+        const n = Number(dot.dataset.dot);
+        dot.classList.toggle('active', n === wizState.step);
+        dot.classList.toggle('done', n < wizState.step);
+        dot.innerHTML = n < wizState.step ? CHECK_SVG : String(n);
+      });
+      document.querySelectorAll('.wiz-step-line').forEach((line) => {
+        line.classList.toggle('filled', Number(line.dataset.line) < wizState.step);
+      });
+      document.querySelectorAll('.wiz-step-labels span').forEach((lab) => {
+        lab.classList.toggle('active', Number(lab.dataset.label) === wizState.step);
+      });
+
+      // Footer buttons
+      wizBackBtn.classList.toggle('invisible', wizState.step === 1);
+      wizNextBtn.textContent = wizState.step === 4 ? 'Подтвердить запись' : 'Далее';
+      updateWizardUI();
+
+      if (wizState.step === 3 && !wizState.dateISO) buildDates();
+      if (wizState.step === 3 && wizState.dateISO) renderTimes(wizState.dateISO);
+      if (wizState.step === 4) renderSummary();
+    }
+
+    function updateWizardUI() {
+      wizNextBtn.disabled = !stepIsValid(wizState.step);
+    }
+
+    wizBackBtn.addEventListener('click', () => goToStep(wizState.step - 1));
+
+    wizNextBtn.addEventListener('click', () => {
+      if (!stepIsValid(wizState.step)) return;
+      if (wizState.step < 4) {
+        goToStep(wizState.step + 1);
+      } else {
+        submitBooking();
+      }
+    });
+
+    /* ---------- Phone mask +7 (XXX) XXX-XX-XX ---------- */
+    const phoneInput = document.getElementById('bookPhone');
+
+    function formatPhone(raw) {
+      let d = raw.replace(/\D/g, '');
+      if (d.startsWith('8')) d = '7' + d.slice(1);
+      if (!d.startsWith('7')) d = '7' + d;
+      d = d.slice(0, 11);
+      let out = '+7';
+      if (d.length > 1) out += ' (' + d.slice(1, 4);
+      if (d.length >= 4) out += ') ' + d.slice(4, 7);
+      if (d.length >= 7) out += '-' + d.slice(7, 9);
+      if (d.length >= 9) out += '-' + d.slice(9, 11);
+      return out;
+    }
+
+    phoneInput.addEventListener('input', () => {
+      wizState.phone = formatPhone(phoneInput.value);
+      phoneInput.value = wizState.phone;
+      updateWizardUI();
+      if (phoneInput.value.replace(/\D/g, '').length === 11) {
+        document.getElementById('fieldPhone').classList.remove('show-error');
+        phoneInput.classList.remove('invalid');
+      }
+    });
+
+    phoneInput.addEventListener('focus', () => {
+      if (!phoneInput.value) { phoneInput.value = '+7 ('; wizState.phone = phoneInput.value; }
+    });
+
+    phoneInput.addEventListener('blur', () => {
+      if (phoneInput.value.replace(/\D/g, '').length <= 1) { phoneInput.value = ''; wizState.phone = ''; }
+    });
+
+    const nameInput = document.getElementById('bookName');
+    nameInput.addEventListener('input', () => {
+      wizState.name = nameInput.value;
+      if (nameInput.value.trim().length >= 2) {
+        document.getElementById('fieldName').classList.remove('show-error');
+        nameInput.classList.remove('invalid');
+      }
+      updateWizardUI();
+    });
+
+    document.getElementById('bookConsent').addEventListener('change', () => {
+      document.getElementById('consentRow').classList.remove('show-error');
+      updateWizardUI();
+    });
+
+    /* ---------- Submit ---------- */
+    function submitBooking() {
+      const nameOk = wizState.name.trim().length >= 2;
+      const digits = wizState.phone.replace(/\D/g, '');
+      const phoneOk = digits.length === 11;
+      const consentOk = document.getElementById('bookConsent').checked;
+
+      document.getElementById('fieldName').classList.toggle('show-error', !nameOk);
+      nameInput.classList.toggle('invalid', !nameOk);
+      document.getElementById('fieldPhone').classList.toggle('show-error', !phoneOk);
+      phoneInput.classList.toggle('invalid', !phoneOk);
+      document.getElementById('consentRow').classList.toggle('show-error', !consentOk);
+
+      if (!(nameOk && phoneOk && consentOk)) return;
+
+      const svc = SERVICES.find((s) => s.id === wizState.serviceId);
+      const mst = wizState.masterId === 'any'
+        ? 'свободному мастеру'
+        : (MASTERS.find((m) => m.id === wizState.masterId) || {}).name;
+      const parts = wizState.dateISO.split('-');
+      const dateTxt = Number(parts[2]) + ' ' + MONTHS_FULL[Number(parts[1]) - 1];
+
+      document.getElementById('succDetail').innerHTML =
+        wizState.name.trim() + ', вы записаны на <b>' + (svc ? svc.title : '') + '</b><br>' +
+        dateTxt + ' в ' + wizState.time + ' · ' + mst;
+
+      wizSuccess.classList.add('visible');
+    }
+
+    /* ---------- Open wizard (with optional pre-selected service) ---------- */
+    function openBooking(preselectServiceId) {
+      // Reset state on fresh open
+      Object.assign(wizState, {
+        step: 1, category: 'all', serviceId: null, masterId: null,
+        dateISO: null, time: null, name: '', phone: ''
+      });
+      nameInput.value = '';
+      phoneInput.value = '';
+      document.getElementById('bookConsent').checked = false;
+      document.querySelectorAll('.show-error').forEach((el) => el.classList.remove('show-error'));
+      wizSuccess.classList.remove('visible');
+
+      document.querySelectorAll('.wiz-cat').forEach((c) => {
+        c.classList.toggle('active', c.dataset.wcat === 'all');
+      });
+
+      if (preselectServiceId) {
+        const svc = SERVICES.find((s) => s.id === preselectServiceId);
+        if (svc) {
+          wizState.serviceId = svc.id;
+          wizState.category = svc.cat;
+          document.querySelectorAll('.wiz-cat').forEach((c) => {
+            c.classList.toggle('active', c.dataset.wcat === svc.cat);
+          });
+        }
+      }
+
+      renderWizServices();
+      renderWizMasters();
+      buildDates();
+      goToStep(preselectServiceId ? 2 : 1);
+      safeOpen(bookingModal);
+    }
+
+    // Global [data-open-booking] triggers
+    document.querySelectorAll('[data-open-booking]').forEach((el) => {
+      el.addEventListener('click', (e) => {
+        e.preventDefault();
+        openBooking(null);
+      });
+    });
+
+    /* ==============================================================
+       G7. COOKIE BANNER — localStorage persistence
+       ============================================================== */
+    (function initCookies() {
+      const KEY = 'lumiere_cookie_consent';
+      const banner = document.getElementById('cookieBanner');
+      let stored = null;
+      try { stored = localStorage.getItem(KEY); } catch (err) { stored = null; }
+
+      if (!stored) {
+        setTimeout(() => banner.classList.add('visible'), 1400);
+      }
+
+      const decide = (value) => {
+        try { localStorage.setItem(KEY, value); } catch (err) { /* private mode */ }
+        banner.classList.remove('visible');
+        setTimeout(() => { banner.style.display = 'none'; }, 650);
+      };
+
+      document.getElementById('cookieAccept').addEventListener('click', () => decide('all'));
+      document.getElementById('cookieDecline').addEventListener('click', () => decide('necessary'));
+    })();
+
+    /* ==============================================================
+       Smooth anchor offset (header height compensation done via CSS
+       scroll-padding-top) — plus close mobile menu handled above.
+       ============================================================== */
+  </script>
+</body>
+</html>
